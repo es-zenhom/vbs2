@@ -1,0 +1,16 @@
+2016preVFP:
+VBSZZH_VBSCuts
+VBSZZH_VBSCuts_tthfix
+
+2016postVFP:
+VBSZZH_VBSCuts
+VBSZZH_VBSCuts_tthfix
+
+2017:
+VBSZZH_VBSCuts
+VBSZZH_VBSCuts_tthfix
+
+2018:
+VBSZZH_VBSCuts
+VBSZZH_VBSCuts_tthfix
+

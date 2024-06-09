@@ -1,0 +1,46 @@
+{
+    "input_dir": null,
+    "output_dir": null,
+    "sig_files": [
+        "OSVBSWWH.root",
+        "SSVBSWWH.root",
+        "VBSWZH.root",
+        "VBSZZH.root"
+    ],
+    "bkg_files": [
+        "QCD.root",
+        "rare_EWK.root",
+        "rare_top.root",
+        "ttbar.root",
+        "wjets.root",
+        "zjets.root",
+	"VV_VH.root"
+    ],
+    "data_files": [
+        "data.root"
+    ],
+    "ttree_name": "tree",
+    "weights": [
+        "xsec_sf",
+        "pu_sf",
+        "prefire_sf",
+        "puid_sf"
+    ],
+    "abcd_arms": [
+        {
+            "abcdnet_score": [0.965, 0.99,10 ]
+
+        },
+        {
+            "abs_deta_jj": [5, 7.5, 10],
+            "M_jj": [800, 1400,10 ]
+        }
+    ],
+    "presel": {
+        "hbbfatjet_xbb": [0.8, 0.8, 1],
+        "ld_vqqfatjet_xwqq": [0.6, 0.6, 1],
+        "ld_vqqfatjet_xvqq": [0.6, 0.6, 1]
+
+
+    }
+}

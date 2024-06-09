@@ -1,0 +1,23 @@
+#ignore everything in vbsvvhjets_semimerged
+analysis/studies/vbsvvhjets_semimerged/*
+
+# Do not ignore the output_abcdnet_v3 directory
+!analysis/studies/vbsvvhjets_semimerged/output_abcdnet_v3/
+
+# Do not ignore the main.cc file
+!analysis/studies/vbsvvhjets_semimerged/main.cc
+
+# Ignore specific directories
+analysis/output/
+analysis/data/
+analysis/data_old/
+analysis/combine/
+analysis/NanoTools/
+analysis/rapido/
+analysis/env_analysis/
+abcdnet/uniqueenv/
+# Ignore specific files
+analysis/data.tar.gz
+analysis/data_hadded.root
+analysis/sys
+

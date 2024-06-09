@@ -1,0 +1,117 @@
+./bin/vbsvvhjets_semimerged --input_ttree=Events --output_dir=/home/users/eslam.zenhom/public_html/uf_work/vbs2/analysis/studies/vbsvvhjets_semimerged/output_abcdnet_v3/2017 --output_name=QCD_HT1000to1500_0 --output_ttree=tree --variation=nominal --scale_factor=4.91078691168337133632348923129029572010040283203125 /home/users/eslam.zenhom/public_html/skimdata/bkg_0lep_2ak4_2ak8_ttH/QCD_HT1000to1500_TuneCP5_PSWeights_13TeV-madgraph-pythia8_RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1_NANOAODSIM_bkg_0lep_2ak4_2ak8_ttH/merged_0.root
+Cutflow
+└☑─Bookkeeping
+   pass: 777646 (raw) 3.67687e+06 (wgt)
+   fail: 0 (raw)
+   └☑─SaveSystWeights
+      pass: 777646 (raw) 3.67687e+06 (wgt)
+      fail: 0 (raw)
+      └☑─PassesEventFilters
+         pass: 774372 (raw) 3.66135e+06 (wgt)
+         fail: 3274 (raw) 15522.6 (wgt)
+         └☑─PassesTriggers
+            pass: 772308 (raw) 3.65248e+06 (wgt)
+            fail: 2064 (raw) 8870.38 (wgt)
+            └☑─SelectLeptons
+               pass: 772308 (raw) 3.65248e+06 (wgt)
+               fail: 0 (raw)
+               └☑─NoLeptons
+                  pass: 772308 (raw) 3.65248e+06 (wgt)
+                  fail: 0 (raw)
+                  └☑─SelectFatJets
+                     pass: 772308 (raw) 3.65248e+06 (wgt)
+                     fail: 0 (raw)
+                     └☑─TriggerPlateauCuts
+                        pass: 422948 (raw) 2.01815e+06 (wgt)
+                        fail: 349360 (raw) 1.63433e+06 (wgt)
+                        └☑─Geq3FatJets
+                           pass: 5837 (raw) 27650.2 (wgt)
+                           fail: 417111 (raw) 1.9905e+06 (wgt)
+                           ├☑─AllMerged_SelectVVHFatJets
+                           │  pass: 5837 (raw) 27650.2 (wgt)
+                           │  fail: 0 (raw)
+                           │  └☑─AllMerged_SelectJets
+                           │     pass: 5837 (raw) 27499.9 (wgt)
+                           │     fail: 0 (raw)
+                           │     └☑─AllMerged_SelectVBSJets
+                           │        pass: 1939 (raw) 9023.83 (wgt)
+                           │        fail: 3898 (raw) 18476.1 (wgt)
+                           │        └☑─AllMerged_SaveVariables
+                           │           pass: 1939 (raw) 9023.83 (wgt)
+                           │           fail: 0 (raw)
+                           │           └☑─AllMerged_MjjGt500
+                           │              pass: 372 (raw) 1670.77 (wgt)
+                           │              fail: 1567 (raw) 7353.06 (wgt)
+                           │              └☑─AllMerged_detajjGt3
+                           │                 pass: 351 (raw) 1577.18 (wgt)
+                           │                 fail: 21 (raw) 93.589 (wgt)
+                           │                 └☑─AllMerged_XbbGt0p9
+                           │                    pass: 8 (raw) 34.5949 (wgt)
+                           │                    fail: 343 (raw) 1542.59 (wgt)
+                           │                    └☑─AllMerged_XVqqGt0p9
+                           │                       pass: 0 (raw)
+                           │                       fail: 8 (raw) 34.5949 (wgt)
+                           │                       └☑─AllMerged_STGt1300
+                           │                          pass: 0 (raw)
+                           │                          fail: 0 (raw)
+                           │                          └☑─AllMerged_HbbMSDLt150
+                           │                             pass: 0 (raw)
+                           │                             fail: 0 (raw)
+                           │                             └☑─AllMerged_VqqMSDLt120
+                           │                                pass: 0 (raw)
+                           │                                fail: 0 (raw)
+                           └☒─Exactly2FatJets
+                              └☑─SemiMerged_SelectVVHFatJets
+                                 pass: 417111 (raw) 1.9905e+06 (wgt)
+                                 fail: 0 (raw)
+                                 └☑─SemiMerged_SelectJets
+                                    pass: 417111 (raw) 1.97998e+06 (wgt)
+                                    fail: 0 (raw)
+                                    └☑─SemiMerged_Geq4Jets
+                                       pass: 77828 (raw) 363950 (wgt)
+                                       fail: 339283 (raw) 1.61603e+06 (wgt)
+                                       └☑─SemiMerged_SelectVJets
+                                          pass: 77828 (raw) 363950 (wgt)
+                                          fail: 0 (raw)
+                                          └☑─SemiMerged_SelectVBSJets
+                                             pass: 39241 (raw) 181135 (wgt)
+                                             fail: 38587 (raw) 182814 (wgt)
+                                             └☑─SemiMerged_SaveVariables
+                                                pass: 39241 (raw) 181135 (wgt)
+                                                fail: 0 (raw)
+                                                └☑─Addition_Vqqjets
+                                                   pass: 39241 (raw) 181135 (wgt)
+                                                   fail: 0 (raw)
+                                                   └☑─Cut1
+                                                      pass: 4656 (raw) 21594.6 (wgt)
+                                                      fail: 34585 (raw) 159541 (wgt)
+                                                      └☑─Cut2
+                                                         pass: 402 (raw) 1872.49 (wgt)
+                                                         fail: 4254 (raw) 19722.1 (wgt)
+                                                         └☑─Cut3
+                                                            pass: 340 (raw) 1590.73 (wgt)
+                                                            fail: 62 (raw) 281.76 (wgt)
+                                                            └☑─SemiMerged_MjjGt500
+                                                               pass: 79 (raw) 368.904 (wgt)
+                                                               fail: 261 (raw) 1221.82 (wgt)
+                                                               └☑─SemiMerged_detajjGt3
+                                                                  pass: 73 (raw) 339.842 (wgt)
+                                                                  fail: 6 (raw) 29.0627 (wgt)
+                                                                  └☑─SemiMerged_XbbGt0p9
+                                                                     pass: 45 (raw) 208.994 (wgt)
+                                                                     fail: 28 (raw) 130.847 (wgt)
+                                                                     └☑─SemiMerged_XVqqGt0p9
+                                                                        pass: 10 (raw) 48.3296 (wgt)
+                                                                        fail: 35 (raw) 160.665 (wgt)
+                                                                        └☑─SemiMerged_STGt1300
+                                                                           pass: 2 (raw) 9.3938 (wgt)
+                                                                           fail: 8 (raw) 38.9358 (wgt)
+                                                                           └☑─SemiMerged_HbbMSDLt150
+                                                                              pass: 2 (raw) 9.3938 (wgt)
+                                                                              fail: 0 (raw)
+                                                                              └☑─SemiMerged_VqqMSDLt120
+                                                                                 pass: 1 (raw) 4.24718 (wgt)
+                                                                                 fail: 1 (raw) 5.14662 (wgt)
+                                                                                 └☑─SemiMerged_VqqMjjLt120
+                                                                                    pass: 1 (raw) 4.24718 (wgt)
+                                                                                    fail: 0 (raw)

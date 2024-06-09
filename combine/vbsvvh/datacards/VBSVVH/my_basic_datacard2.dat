@@ -1,0 +1,60 @@
+imax 4 number of channels
+jmax 1 number of backgrounds
+kmax * number of nuisance parameters
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+bin                                                             A           B           C           D
+observation                                                     4         157        1459       46474
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+bin                                                             A           B           C           D           A           B           C           D
+process                                                  TotalSig    TotalSig    TotalSig    TotalSig    TotalBkg    TotalBkg    TotalBkg    TotalBkg
+process                                                         0           0           0           0           1           1           1           1
+rate                                                         1.21        1.56        5.52        9.34        1.00        1.00        1.00        1.00
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+CMS_vbsvvhjets_abcd_syst                       lnN              -           -           -           -      1.2540           -           -           -
+CMS_vbsvvhjets_abcd_statB                      lnN              -           -           -           -      1.0798      1.0798           -           -
+CMS_vbsvvhjets_abcd_statC                      lnN              -           -           -           -      1.0262           -      1.0262           -
+CMS_vbsvvhjets_abcd_statD                      lnN              -           -           -           -      1.0046           -           -      1.0046
+CMS_LHE_weights_scale_muR_vbsvvh               lnN         1.0000      1.0000      1.0000      1.0000           -           -           -           -
+CMS_LHE_weights_scale_muF_vbsvvh               lnN         1.2852      1.2691      1.2248      1.1961           -           -           -           -
+CMS_PSWeight_ISR_vbsvvh                        lnN         1.0082      1.0076      1.0059      1.0147           -           -           -           -
+CMS_PSWeight_FSR_vbsvvh                        lnN         1.0336      1.0523      1.0414      1.0423           -           -           -           -
+CMS_vbsvvh_puWeight                            lnN         1.0018      1.0207      1.0053      1.0157           -           -           -           -
+CMS_vbsvvh_puJetId                             lnN         1.0112      1.0123      1.0108      1.0117           -           -           -           -
+CMS_PrefireWeight_13TeV                        lnN         1.0065      1.0087      1.0075      1.0101           -           -           -           -
+CMS_vbsvvhjets_mcstatA                         lnN         1.0247           -           -           -           -           -           -           -
+CMS_vbsvvhjets_mcstatB                         lnN              -      1.0223           -           -           -           -           -           -
+CMS_vbsvvhjets_mcstatC                         lnN              -           -      1.0113           -           -           -           -           -
+CMS_vbsvvhjets_mcstatD                         lnN              -           -           -      1.0087           -           -           -           -
+CMS_scale_j_Absolute_13TeV                     lnN         1.0717      1.0892      1.0514      1.0584           -           -           -           -
+CMS_scale_j_Absolute_2016postVFP_13TeV         lnN         1.0059      1.0098      1.0052      1.0049           -           -           -           -
+CMS_scale_j_Absolute_2016preVFP_13TeV          lnN         1.0081      1.0092      1.0031      1.0054           -           -           -           -
+CMS_scale_j_Absolute_2017_13TeV                lnN         1.0163      1.0104      1.0066      1.0077           -           -           -           -
+CMS_scale_j_Absolute_2018_13TeV                lnN         1.0067      1.0073      1.0053      1.0054           -           -           -           -
+CMS_scale_j_BBEC1_2016postVFP_13TeV            lnN         1.0015      1.0024      1.0014      1.0011           -           -           -           -
+CMS_scale_j_BBEC1_2016preVFP_13TeV             lnN         1.0007      1.0024      1.0009      1.0013           -           -           -           -
+CMS_scale_j_BBEC1_2017_13TeV                   lnN         1.0015      1.0000      1.0016      1.0019           -           -           -           -
+CMS_scale_j_BBEC1_2018_13TeV                   lnN         1.0015      1.0006      1.0014      1.0022           -           -           -           -
+CMS_scale_j_BBEC1_13TeV                        lnN         1.0141      1.0116      1.0077      1.0084           -           -           -           -
+CMS_scale_j_EC2_2016postVFP_13TeV              lnN         1.0000      1.0018      1.0017      1.0023           -           -           -           -
+CMS_scale_j_EC2_2016preVFP_13TeV               lnN         1.0022      1.0055      1.0008      1.0021           -           -           -           -
+CMS_scale_j_EC2_2017_13TeV                     lnN         1.0081      1.0104      1.0052      1.0079           -           -           -           -
+CMS_scale_j_EC2_2018_13TeV                     lnN         1.0044      1.0055      1.0016      1.0024           -           -           -           -
+CMS_scale_j_EC2_13TeV                          lnN         1.0089      1.0141      1.0066      1.0123           -           -           -           -
+CMS_scale_j_FlavorQCD_13TeV                    lnN         1.0414      1.0507      1.0355      1.0368           -           -           -           -
+CMS_scale_j_HF_2016postVFP_13TeV               lnN         1.0037      1.0018      1.0022      1.0016           -           -           -           -
+CMS_scale_j_HF_2016preVFP_13TeV                lnN         1.0007      1.0018      1.0017      1.0014           -           -           -           -
+CMS_scale_j_HF_2017_13TeV                      lnN         1.0059      1.0024      1.0023      1.0015           -           -           -           -
+CMS_scale_j_HF_2018_13TeV                      lnN         1.0022      1.0037      1.0022      1.0020           -           -           -           -
+CMS_scale_j_HF_13TeV                           lnN         1.0274      1.0324      1.0200      1.0222           -           -           -           -
+CMS_scale_j_RelativeBal_13TeV                  lnN         1.0496      1.0629      1.0463      1.0447           -           -           -           -
+CMS_scale_j_RelativeSample_2016postVFP_13TeV   lnN         1.0170      1.0183      1.0139      1.0135           -           -           -           -
+CMS_scale_j_RelativeSample_2016preVFP_13TeV    lnN         1.0133      1.0244      1.0114      1.0161           -           -           -           -
+CMS_scale_j_RelativeSample_2017_13TeV          lnN         1.0237      1.0250      1.0194      1.0139           -           -           -           -
+CMS_scale_j_RelativeSample_2018_13TeV          lnN         1.0222      1.0189      1.0216      1.0181           -           -           -           -
+CMS_res_j_13TeV                                lnN         1.0148      1.0385      1.0142      1.0233           -           -           -           -
+lumi_13TeV_correlated                          lnN         1.0160      1.0160      1.0160      1.0160           -           -           -           -
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+vbsvvhjets_a rateParam                                 A      TotalBkg (@0*@1/@2) vbsvvhjets_b,vbsvvhjets_c,vbsvvhjets_d
+vbsvvhjets_b rateParam                                 B      TotalBkg 157
+vbsvvhjets_c rateParam                                 C      TotalBkg 1459
+vbsvvhjets_d rateParam                                 D      TotalBkg 46474

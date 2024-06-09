@@ -1,0 +1,256 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*
+import argparse
+import logging
+import glob
+import json
+import os
+import re
+import uproot
+from subprocess import Popen, PIPE
+from decimal import Decimal
+from utils.orchestrator import Orchestrator
+import utils.file_info
+
+class VBSOrchestrator(Orchestrator):
+    def __init__(self, output_dir, output_ttree, study_exe, input_files, 
+                 xsecs_json="data/xsecs.json", variation="", n_workers=8):
+        self.output_dir = output_dir
+        self.output_ttree = output_ttree
+        self.variation = variation
+        self.xsecs_json = xsecs_json
+        super().__init__(study_exe, input_files, n_workers=n_workers)
+
+    def get_file_info(self, input_file):
+        file_info = {
+            "is_data": ("Run201" in input_file),
+            "is_signal": ("privateMC_NANOGEN" in input_file), 
+            "output_name": None, # set below, depends on is_data
+            "output_dir": None,  # set below, depends on year
+            "n_events": None,    # set by file_info.parse
+            "xsec": None,        # set by file_info.parse
+            "lumi": None,        # set by file_info.parse
+            "year": None,        # set by file_info.parse
+            "xsec_sf": None      # set by file_info.parse
+        }
+
+        # Get output info
+        if file_info["is_data"]:
+            file_info["xsec_sf"] = 1
+            file_info["year"] = utils.file_info.get_year(input_file)
+            file_info["output_name"] = input_file.split("/")[-2].split("UL")[0][:-1].split('/')[-1]
+        else:
+            file_info.update(utils.file_info.parse(input_file=input_file, xsecs_json=self.xsecs_json))
+            file_info["output_name"] = input_file.split("_Tune")[0].split('/')[-1]
+
+        if input_file.split("/")[-1][:7] == "merged_":
+            file_info["output_name"] += input_file.split("/")[-1].split("merged")[-1].replace(".root", "")
+            # Find companion files and adjust xsec_sf accordingly
+            if not file_info["is_data"]:
+                input_dir = "/".join(input_file.split("/")[:-1])
+                for other_file in self.input_files:
+                    if other_file != input_file and "/".join(other_file.split("/")[:-1]) == input_dir:
+                        other_file_info = utils.file_info.parse(input_file=other_file, xsecs_json=self.xsecs_json)
+                        file_info["n_events"] += other_file_info["n_events"]
+                file_info["xsec_sf"] = file_info["xsec"]*1000*file_info["lumi"]/file_info["n_events"]
+
+        file_info["output_dir"] = f"{self.output_dir}/{file_info['year']}"
+        os.makedirs(file_info["output_dir"], exist_ok=True)
+
+        return file_info
+
+    def _get_log_files(self, input_file):
+        file_info = self.get_file_info(input_file)
+        stdout_file = f"{file_info['output_dir']}/{file_info['output_name']}.out"
+        stderr_file = f"{file_info['output_dir']}/{file_info['output_name']}.err"
+        return stdout_file, stderr_file
+
+    def _get_job(self, input_file):
+        file_info = self.get_file_info(input_file)
+        cmd = [
+            self.executable,
+            f"--input_ttree=Events",
+            f"--output_dir={file_info['output_dir']}",
+            f"--output_name={file_info['output_name']}",
+            f"--output_ttree={self.output_ttree}",
+            f"--variation={self.variation}"
+        ]
+        if file_info["is_signal"]:
+            cmd.append("--is_signal")
+        if file_info["is_data"]:
+            cmd.append("--is_data")
+        else:
+            xsec = file_info["xsec"]
+            lumi = file_info["lumi"]
+            year = file_info["year"]
+            n_events = file_info["n_events"]
+            sf = file_info["xsec_sf"]
+            if "WJetsToLNu_HT-" in file_info["output_name"]:
+                with open("data/wjets_ht-binned_xsecs.json", "r") as f_in:
+                    wjets_xsecs = json.load(f_in)
+                    xsec = wjets_xsecs[year][file_info["output_name"]]
+                sf *= xsec
+            cmd.append(f"--scale_factor={Decimal.from_float(sf)}")
+            logging.info(f"{file_info['output_name']} ({year}) sf = ({xsec})*1000*({lumi})/{n_events} = {sf}")
+        cmd.append(input_file)
+        return cmd
+
+if __name__ == "__main__":
+    # Check that the PWD is correct
+    vbs_pwd = os.getenv("VBSPWD")
+    if not vbs_pwd:
+        print(f"ERROR: `source setup.sh` must be run first")
+        exit()
+    elif os.getcwd() != vbs_pwd:
+        print(f"ERROR: must be run within {vbs_pwd}")
+        exit()
+
+    cli = argparse.ArgumentParser(description="Run a given study in parallel")
+    cli.add_argument(
+        "study", type=str,
+        help="Name of the study to run"
+    )
+    cli.add_argument(
+        "--skimdir", type=str, default="/ceph/cms/store/user/jguiang/VBSVHSkim",
+        help="Base directory containing skims for this analysis (e.g. /ceph/cms/store/user/jguiang/VBSVHSkim)"
+    )
+    cli.add_argument(
+        "--skimtag", type=str, default="",
+        help="Tag for skim (i.e. bkg_{SKIMTAG}, sig_{SKIMTAG}, data_{SKIMTAG})"
+    )
+    cli.add_argument(
+        "--skims", type=str, nargs="*", default=[],
+        help="Space-separated list of standalone skims"
+    )
+    cli.add_argument(
+        "--tag", type=str, default="",
+        help="Unique tag for output"
+    )
+    cli.add_argument(
+        "--var", type=str, default="nominal",
+        help="Type of variation (e.g. 'up', 'down', 'nominal', ...)"
+    )
+    cli.add_argument(
+        "--filter", type=str,
+        help="Regex filter for selecting matching datasets"
+    )
+    cli.add_argument(
+        "--ifilter", type=str,
+        help="Regex filter for excluding matching datasets"
+    )
+    cli.add_argument(
+        "--output_ttree", type=str, default="tree",
+        help="Name of output ttree"
+    )
+    cli.add_argument(
+        "--n_workers", type=int, default=8,
+        help="Maximum number of worker processes"
+    )
+    cli.add_argument(
+        "--no_make", action="store_true",
+        help="Do not run make before running the study"
+    )
+    cli.add_argument(
+        "--data", action="store_true",
+        help="Run looper over data files (in addition to MC)"
+    )
+    args = cli.parse_args()
+
+    if args.skimtag:
+        if args.data:
+            skims = [f"{prefix}_{args.skimtag}" for prefix in ["bkg", "sig", "data"]]
+        else:
+            skims = [f"{prefix}_{args.skimtag}" for prefix in ["bkg", "sig"]]
+    elif args.skims:
+        skims = args.skims
+    else:
+        raise Exception("no skims provided")
+
+    samples = []
+    for skim in skims:
+        if skim[:4] == "sig_":
+            samples += glob.glob(f"{args.skimdir}/{skim}/*RunIISummer20UL16*/merged*.root") # Also picks up RunIISummer20UL16APV
+            samples += glob.glob(f"{args.skimdir}/{skim}/*RunIISummer20UL17*/merged*.root")
+            samples += glob.glob(f"{args.skimdir}/{skim}/*RunIISummer20UL18*/merged*.root")
+        elif skim[:5] == "data_":
+            samples += glob.glob(f"{args.skimdir}/{skim}/*-HIPM_UL2016*NanoAODv9*/merged*.root")
+            samples += glob.glob(f"{args.skimdir}/{skim}/*-UL2016*NanoAODv9*/merged*.root")
+            samples += glob.glob(f"{args.skimdir}/{skim}/*-UL2017*NanoAODv9*/merged*.root")
+            samples += glob.glob(f"{args.skimdir}/{skim}/*-UL2018*NanoAODv9*/merged*.root")
+        else:
+            samples += glob.glob(f"{args.skimdir}/{skim}/*UL16NanoAODAPVv9*/merged*.root")
+            samples += glob.glob(f"{args.skimdir}/{skim}/*UL16NanoAODv9*/merged*.root")
+            samples += glob.glob(f"{args.skimdir}/{skim}/*UL17NanoAODv9*/merged*.root")
+            samples += glob.glob(f"{args.skimdir}/{skim}/*UL18NanoAODv9*/merged*.root")
+    if args.skims:
+        samples += glob.glob(f"{args.skimdir}/{skim}/*/merged*.root")
+    if not samples:
+        print("No samples found in these directories:")
+        print("\n".join([f"{args.skimdir}/{skim}" for skim in skims]))
+        exit()
+
+    if args.tag:
+        output_dir=f"studies/{args.study}/output_{args.tag}"
+    else:
+        output_dir=f"studies/{args.study}/output"
+
+    os.makedirs(output_dir, exist_ok=True)
+    logging.basicConfig(
+        filename=f"{output_dir}/run.log",
+        filemode="w",
+        format="%(levelname)s [%(asctime)s]: %(message)s",
+        datefmt="%m-%d-%Y %H:%M:%S %p",
+        level="DEBUG"
+    )
+
+    if not args.no_make:
+        print(f"make study={args.study} clean")
+        Popen(f"make study={args.study} clean".split(), stdout=PIPE).wait()
+        print(f"make study={args.study}")
+        stdout, stderr = Popen(f"make study={args.study}".split(), stdout=PIPE, stderr=PIPE).communicate()
+        if stderr:
+            raise RuntimeError(
+                f"make study={args.study} failed with the following error\n\n"
+                + stderr.decode("utf-8")
+            )
+
+    if args.filter:
+        filter_re = re.compile(args.filter)
+        samples = [sample for sample in samples if filter_re.match(sample)]
+        if not samples:
+            print(f"Filter '{args.filter}' did not match any datasets")
+            exit()
+        print(f"Filter '{args.filter}' matched {len(samples)} datasets:")
+        print("\n".join(samples))
+        resp = ""
+        while resp != "y" and resp != "n":
+            resp = input("Run analysis jobs for these samples? y/n: ").lower()
+        if resp == "n":
+            exit()
+
+    if args.ifilter:
+        ifilter_re = re.compile(args.ifilter)
+        excl_samples = [sample for sample in samples if ifilter_re.match(sample)]
+        samples = [sample for sample in samples if not sample in excl_samples]
+        if not samples:
+            print(f"Filter '{args.ifilter}' did not exclude any datasets")
+        else:
+            print(f"Filter '{args.ifilter}' excluded {len(excl_samples)} datasets:")
+            print("\n".join(excl_samples))
+        resp = ""
+        while resp != "y" and resp != "n":
+            resp = input("Run analysis jobs without these samples? y/n: ").lower()
+        if resp == "n":
+            exit()
+
+    print(f"Orchestrating {len(samples)} jobs...")
+    orchestrator = VBSOrchestrator(
+        output_dir,
+        args.output_ttree,
+        f"./bin/{args.study}", 
+        samples, 
+        "data/xsecs.json",
+        variation=args.var,
+        n_workers=args.n_workers
+    )
+    orchestrator.run()
