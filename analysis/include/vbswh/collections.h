@@ -93,7 +93,7 @@ struct Analysis : Core::Analysis
     BTagSFs* btag_sfs;
     PileUpSFs* pu_sfs;
     PileUpJetIDSFs* puid_sfs;
-    ParticleNetXbbSFs* xbb_sfs;
+    VBSWHXbbSFs* xbb_sfs;
     bool all_corrections;
 
     Analysis(Arbol& arbol_ref, Nano& nt_ref, HEPCLI& cli_ref, Cutflow& cutflow_ref) 
@@ -127,6 +127,18 @@ struct Analysis : Core::Analysis
         arbol.newBranch<double>("muon_iso_sf", -999);
         arbol.newBranch<double>("muon_iso_sf_up", -999);
         arbol.newBranch<double>("muon_iso_sf_dn", -999);
+        arbol.newBranch<double>("elec_id_sf", -999);
+        arbol.newBranch<double>("elec_id_sf_up", -999);
+        arbol.newBranch<double>("elec_id_sf_dn", -999);
+        arbol.newBranch<double>("muon_id_sf", -999);
+        arbol.newBranch<double>("muon_id_sf_up", -999);
+        arbol.newBranch<double>("muon_id_sf_dn", -999);
+        arbol.newBranch<double>("trig_elec_sf", -999);
+        arbol.newBranch<double>("trig_elec_sf_up", -999);
+        arbol.newBranch<double>("trig_elec_sf_dn", -999);
+        arbol.newBranch<double>("trig_muon_sf", -999);
+        arbol.newBranch<double>("trig_muon_sf_up", -999);
+        arbol.newBranch<double>("trig_muon_sf_dn", -999);
         arbol.newBranch<int>("lep_pdgID", -999);
         arbol.newBranch<double>("lep_pt", -999);
         arbol.newBranch<double>("lep_eta", -999);
@@ -164,7 +176,7 @@ struct Analysis : Core::Analysis
         btag_sfs = new BTagSFs(cli.output_name, "M");
         pu_sfs = new PileUpSFs();
         puid_sfs = new PileUpJetIDSFs();
-        xbb_sfs = new ParticleNetXbbSFs();
+        xbb_sfs = new VBSWHXbbSFs();
         all_corrections = true;
     };
 
@@ -213,10 +225,13 @@ struct Analysis : Core::Analysis
         // VBS jet selection
         Cut* select_vbsjets_maxE = new Core::SelectVBSJetsMaxE("SelectVBSJetsMaxE", *this);
         cutflow.insert(select_jets, select_vbsjets_maxE, Right);
+        // Cut* select_vbsjets = new Core::SelectVBSJets("SelectVBSJets", *this);
+        // cutflow.insert(select_jets, select_vbsjets, Right);
 
         // Save LHE mu_R and mu_F scale weights
         Cut* save_lhe = new Core::SaveSystWeights("SaveSystWeights", *this);
         cutflow.insert(select_vbsjets_maxE, save_lhe, Right);
+        // cutflow.insert(select_vbsjets, save_lhe, Right);
 
         // Save analysis variables
         Cut* save_vars = new SaveVariables("SaveVariables", *this, xbb_sfs);

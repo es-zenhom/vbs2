@@ -719,11 +719,11 @@ int main(int argc, const char* argv[])
 			// if ( !(abcdnet_score > 0.976 )  ) continue;
 			// if ( !(abs_deta_jj > 6) ) continue;
 			// if ( !(M_jj > 1000) ) continue;
-			// if ( ld_vqqfatjet_xwqq < 0.6) continue;
+			 if ( ld_vqqfatjet_xwqq < 0.6) continue;
 			// if ( ST < 1800) continue;
 
 			// if ( ld_vqqfatjet_xvqq < 0.6) continue;
-			// if ( hbbfatjet_xbb < 0.8) continue;
+			 if ( hbbfatjet_xbb < 0.8) continue;
 
 			if(i1% 10000 ==0) std::cout<<i1<<std::endl;
 			weight_of_eachevent = xsec_sf*pu_sf*prefire_sf*puid_sf;

@@ -48,7 +48,7 @@ public:
 class PassesTriggers : public Core::AnalysisCut
 {
 public:
-    PassesTriggers(std::string name, Core::Analysis& analysis) : Core::AnalysisCut(name, analysis)
+    PassesTriggers(std::string name, Core::Analysis& analysis) : Core::AnalysisCut(name, analysis) 
     {
         // Do nothing
     };
@@ -63,50 +63,50 @@ public:
             catch (const runtime_error& error) { /* do nothing */ }
             try { passed = (passed || nt.HLT_PFHT900()); }
             catch (const runtime_error& error) { /* do nothing */ }
-            try { passed = (passed || nt.HLT_AK8PFHT650_TrimR0p1PT0p03Mass50()); }
-            catch (const runtime_error& error) { /* do nothing */ }
-            try { passed = (passed || nt.HLT_AK8PFHT700_TrimR0p1PT0p03Mass50()); }
-            catch (const runtime_error& error) { /* do nothing */ }
-            try { passed = (passed || nt.HLT_AK8PFJet450()); }
-            catch (const runtime_error& error) { /* do nothing */ }
-            try { passed = (passed || nt.HLT_AK8PFJet360_TrimMass30()); }
-            catch (const runtime_error& error) { /* do nothing */ }
-            try { passed = (passed || nt.HLT_AK8DiPFJet280_200_TrimMass30()); }
-            catch (const runtime_error& error) { /* do nothing */ }
-            try { passed = (passed || nt.HLT_AK8DiPFJet280_200_TrimMass30_BTagCSV_p20()); }
-            catch (const runtime_error& error) { /* do nothing */ }
+            // try { passed = (passed || nt.HLT_AK8PFHT650_TrimR0p1PT0p03Mass50()); }
+            // catch (const runtime_error& error) { /* do nothing */ }
+            // try { passed = (passed || nt.HLT_AK8PFHT700_TrimR0p1PT0p03Mass50()); }
+            // catch (const runtime_error& error) { /* do nothing */ }
+            // try { passed = (passed || nt.HLT_AK8PFJet450()); }
+            // catch (const runtime_error& error) { /* do nothing */ }
+            // try { passed = (passed || nt.HLT_AK8PFJet360_TrimMass30()); }
+            // catch (const runtime_error& error) { /* do nothing */ }
+            // try { passed = (passed || nt.HLT_AK8DiPFJet280_200_TrimMass30()); }
+            // catch (const runtime_error& error) { /* do nothing */ }
+            // try { passed = (passed || nt.HLT_AK8DiPFJet280_200_TrimMass30_BTagCSV_p20()); }
+            // catch (const runtime_error& error) { /* do nothing */ }
             break;
         case (2017):
             try { passed = (passed || nt.HLT_PFHT1050()); }
             catch (const runtime_error& error) { /* do nothing */ }
-            try { passed = (passed || nt.HLT_AK8PFHT800_TrimMass50()); }
-            catch (const runtime_error& error) { /* do nothing */ }
-            try { passed = (passed || nt.HLT_PFJet320()); }
-            catch (const runtime_error& error) { /* do nothing */ }
-            try { passed = (passed || nt.HLT_PFJet500()); }
-            catch (const runtime_error& error) { /* do nothing */ }
-            try { passed = (passed || nt.HLT_AK8PFJet320()); }
-            catch (const runtime_error& error) { /* do nothing */ }
-            try { passed = (passed || nt.HLT_AK8PFJet500()); }
-            catch (const runtime_error& error) { /* do nothing */ }
-            try { passed = (passed || nt.HLT_AK8PFJet400_TrimMass30()); }
-            catch (const runtime_error& error) { /* do nothing */ }
-            try { passed = (passed || nt.HLT_AK8PFJet420_TrimMass30()); }
-            catch (const runtime_error& error) { /* do nothing */ }
+            // try { passed = (passed || nt.HLT_AK8PFHT800_TrimMass50()); }
+            // catch (const runtime_error& error) { /* do nothing */ }
+            // try { passed = (passed || nt.HLT_PFJet320()); }
+            // catch (const runtime_error& error) { /* do nothing */ }
+            // try { passed = (passed || nt.HLT_PFJet500()); }
+            // catch (const runtime_error& error) { /* do nothing */ }
+            // try { passed = (passed || nt.HLT_AK8PFJet320()); }
+            // catch (const runtime_error& error) { /* do nothing */ }
+            // try { passed = (passed || nt.HLT_AK8PFJet500()); }
+            // catch (const runtime_error& error) { /* do nothing */ }
+            // try { passed = (passed || nt.HLT_AK8PFJet400_TrimMass30()); }
+            // catch (const runtime_error& error) { /* do nothing */ }
+            // try { passed = (passed || nt.HLT_AK8PFJet420_TrimMass30()); }
+            // catch (const runtime_error& error) { /* do nothing */ }
             break;
         case (2018):
             try { passed = (passed || nt.HLT_PFHT1050()); }
             catch (const runtime_error& error) { /* do nothing */ }
-            try { passed = (passed || nt.HLT_AK8PFHT800_TrimMass50()); }
-            catch (const runtime_error& error) { /* do nothing */ }
-            try { passed = (passed || nt.HLT_PFJet500()); }
-            catch (const runtime_error& error) { /* do nothing */ }
-            try { passed = (passed || nt.HLT_AK8PFJet500()); }
-            catch (const runtime_error& error) { /* do nothing */ }
-            try { passed = (passed || nt.HLT_AK8PFJet400_TrimMass30()); }
-            catch (const runtime_error& error) { /* do nothing */ }
-            try { passed = (passed || nt.HLT_AK8PFJet420_TrimMass30()); }
-            catch (const runtime_error& error) { /* do nothing */ }
+            // try { passed = (passed || nt.HLT_AK8PFHT800_TrimMass50()); }
+            // catch (const runtime_error& error) { /* do nothing */ }
+            // try { passed = (passed || nt.HLT_PFJet500()); }
+            // catch (const runtime_error& error) { /* do nothing */ }
+            // try { passed = (passed || nt.HLT_AK8PFJet500()); }
+            // catch (const runtime_error& error) { /* do nothing */ }
+            // try { passed = (passed || nt.HLT_AK8PFJet400_TrimMass30()); }
+            // catch (const runtime_error& error) { /* do nothing */ }
+            // try { passed = (passed || nt.HLT_AK8PFJet420_TrimMass30()); }
+            // catch (const runtime_error& error) { /* do nothing */ }
             break;
         }
         if (!nt.isData() && passed)
@@ -136,8 +136,8 @@ class SelectVVHFatJets : public Core::AnalysisCut
 public:
     Channel channel;
 
-    SelectVVHFatJets(std::string name, Core::Analysis& analysis, Channel channel)
-    : Core::AnalysisCut(name, analysis)
+    SelectVVHFatJets(std::string name, Core::Analysis& analysis, Channel channel) 
+    : Core::AnalysisCut(name, analysis) 
     {
         this->channel = channel;
     };
@@ -247,10 +247,10 @@ public:
     LorentzVector ld_vqqfatjet_p4;
     LorentzVector tr_vqqfatjet_p4;
 
-    SelectJetsNoFatJetOverlap(std::string name, Core::Analysis& analysis, Channel channel,
+    SelectJetsNoFatJetOverlap(std::string name, Core::Analysis& analysis, Channel channel, 
                               JetEnergyScales* jes = nullptr, BTagSFs* btag_sfs = nullptr,
-                              PileUpJetIDSFs* puid_sfs = nullptr)
-    : Core::SelectJets(name, analysis, jes, btag_sfs, puid_sfs)
+                              PileUpJetIDSFs* puid_sfs = nullptr) 
+    : Core::SelectJets(name, analysis, jes, btag_sfs, puid_sfs) 
     {
         this->channel = channel;
     };
@@ -277,8 +277,8 @@ public:
 class SelectVJets : public Core::AnalysisCut
 {
 public:
-    SelectVJets(std::string name, Core::Analysis& analysis)
-    : Core::AnalysisCut(name, analysis)
+    SelectVJets(std::string name, Core::Analysis& analysis) 
+    : Core::AnalysisCut(name, analysis) 
     {
         // Do nothing
     };
@@ -356,15 +356,21 @@ class SaveVariables : public Core::AnalysisCut
 {
 public:
     Channel channel;
+    VBSVVHXbbSFs* xbb_sfs;
+    VBSVVHXWqqSFs* xwqq_sfs;
 
-    SaveVariables(std::string name, Core::Analysis& analysis, Channel channel)
-    : Core::AnalysisCut(name, analysis)
+    SaveVariables(std::string name, Core::Analysis& analysis, Channel channel, VBSVVHXbbSFs* xbb_sfs = nullptr,
+                  VBSVVHXWqqSFs* xwqq_sfs = nullptr) 
+    : Core::AnalysisCut(name, analysis) 
     {
         this->channel = channel;
+        this->xbb_sfs = xbb_sfs;
+        this->xwqq_sfs = xwqq_sfs;
     };
 
     bool evaluate()
     {
+        // Save b-veto
         arbol.setLeaf<bool>("passes_bveto", arbol.getLeaf<int>("n_medium_b_jets") == 0);
         if (channel == AllMerged)
         {
@@ -386,6 +392,56 @@ public:
                 + arbol.getLeaf<double>("tr_vqqjet_pt")
             );
             arbol.setLeaf<bool>("is_semimerged", true);
+        }
+
+        // Save alphaS variations
+        if (!nt.isData() && nt.nLHEPdfWeight() == 103) // PDF-dependent; this is fine for VBSWH signal
+        {
+            arbol.setLeaf<double>("alphaS_up", nt.LHEPdfWeight().at(101));
+            arbol.setLeaf<double>("alphaS_dn", nt.LHEPdfWeight().at(102));
+        }
+        else
+        {
+            arbol.setLeaf<double>("alphaS_up", 1.);
+            arbol.setLeaf<double>("alphaS_dn", 1.);
+        }
+
+        // Save scale factors for ParticleNet signal region cuts
+        if (cli.is_signal)
+        {
+            if (xbb_sfs != nullptr && arbol.getLeaf<double>("hbbfatjet_xbb") > 0.8)
+            {
+                double hbbfatjet_pt = arbol.getLeaf<double>("hbbfatjet_pt");
+                arbol.setLeaf<double>("xbb_sf", xbb_sfs->getSF(hbbfatjet_pt));
+                arbol.setLeaf<double>("xbb_sf_up", xbb_sfs->getSFUp(hbbfatjet_pt));
+                arbol.setLeaf<double>("xbb_sf_dn", xbb_sfs->getSFDn(hbbfatjet_pt));
+            }
+            if (xwqq_sfs != nullptr && arbol.getLeaf<double>("ld_vqqfatjet_xwqq") > 0.8)
+            {
+                double ld_vqqfatjet_pt = arbol.getLeaf<double>("ld_vqqfatjet_pt");
+                arbol.setLeaf<double>("xwqq_ld_vqq_sf", xwqq_sfs->getSF(ld_vqqfatjet_pt, "lead"));
+                arbol.setLeaf<double>("xwqq_ld_vqq_sf_up", xwqq_sfs->getSFUp(ld_vqqfatjet_pt, "lead"));
+                arbol.setLeaf<double>("xwqq_ld_vqq_sf_dn", xwqq_sfs->getSFDn(ld_vqqfatjet_pt, "lead"));
+            }
+            if (xwqq_sfs != nullptr && arbol.getLeaf<double>("tr_vqqfatjet_xwqq") > 0.7)
+            {
+                double tr_vqqfatjet_pt = arbol.getLeaf<double>("tr_vqqfatjet_pt");
+                arbol.setLeaf<double>("xwqq_tr_vqq_sf", xwqq_sfs->getSF(tr_vqqfatjet_pt, "trail"));
+                arbol.setLeaf<double>("xwqq_tr_vqq_sf_up", xwqq_sfs->getSFUp(tr_vqqfatjet_pt, "trail"));
+                arbol.setLeaf<double>("xwqq_tr_vqq_sf_dn", xwqq_sfs->getSFDn(tr_vqqfatjet_pt, "trail"));
+            }
+        }
+        else
+        {
+            arbol.setLeaf<double>("xbb_sf", 1.);
+            arbol.setLeaf<double>("xbb_sf_up", 1.);
+            arbol.setLeaf<double>("xbb_sf_dn", 1.);
+            arbol.setLeaf<double>("xwqq_ld_vqq_sf", 1.);
+            arbol.setLeaf<double>("xwqq_ld_vqq_sf_up", 1.);
+            arbol.setLeaf<double>("xwqq_ld_vqq_sf_dn", 1.);
+            arbol.setLeaf<double>("xwqq_tr_vqq_sf", 1.);
+            arbol.setLeaf<double>("xwqq_tr_vqq_sf_up", 1.);
+            arbol.setLeaf<double>("xwqq_tr_vqq_sf_dn", 1.);
         }
         return true;
     };

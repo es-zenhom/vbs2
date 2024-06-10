@@ -4,9 +4,6 @@ SR_GLOBAL="hbbfatjet_xbb > 0.8 and ld_vqqfatjet_xwqq > 0.6 and ld_vqqfatjet_xvqq
 TAG=abcdnet_v3
 BASEDIR=studies
 
-# if [[ "$BASEDIR" != "studies" ]]; then
-#     rm -rf studies/vbsvvhjets_semimerged/output_${TAG}*
-# fi
 
 for BABYDIR in $BASEDIR/vbsvvhjets_semimerged/output_${TAG}*; do
     BABYTAG=${BABYDIR##*output_}

@@ -77,6 +77,17 @@ int main(int argc, char** argv)
     Arbol arbol = Arbol(cli);
     arbol.newBranch<double>("reweight_c2v_eq_3", -999);
 
+    // Initialize Arbol for PDF variations
+    Arbol pdf_arbol = Arbol(
+        cli.output_dir+"/"+cli.output_name+"_pdf.root",
+        "pdf_"+cli.output_ttree
+    );
+    for (int i = 0; i < 101; ++i)
+    {
+        pdf_arbol.newBranch<double>("lhe_pdf_"+std::to_string(i), -999);
+    }
+    pdf_arbol.newBranch<double>("event_weight", -999);
+
     // Initialize Cutflow
     Cutflow cutflow = Cutflow(cli.output_name + "_Cutflow");
 
@@ -252,17 +263,43 @@ int main(int argc, char** argv)
 
 
     Cut* cut1 = new LambdaCut(
-            "Cut1", [&]() { return arbol.getLeaf<double>("ld_vqqfatjet_xvqq") > 0.6; }
+            "Cut1", [&]() { return arbol.getLeaf<double>("ld_vqqfatjet_xwqq") > 0.6; }
         );
         cutflow.insert("SemiMerged_SaveVariables", cut1, Right);
     Cut* cut2 = new LambdaCut(
             "Cut2", [&]() { return arbol.getLeaf<double>("hbbfatjet_xbb") > 0.8; }
         );
         cutflow.insert("Cut1", cut2, Right);
-    Cut* cut3 = new LambdaCut(
-            "Cut3", [&]() { return arbol.getLeaf<double>("ld_vqqfatjet_xwqq") > 0.6; }
+
+
+
+
+        Cut* save_pdfweights = new LambdaCut(
+            "SemiMerged_SavePDFWeights",
+            [&]()
+            {
+                if (nt.isData()) { return true; }
+                for (int i = 0; i < 101; ++i)
+                {
+                    TString branch_name = "lhe_pdf_"+std::to_string(i);
+                    if (nt.nLHEPdfWeight() >= 101)
+                    {
+                        pdf_arbol.setLeaf<double>(branch_name, nt.LHEPdfWeight().at(i));
+                    }
+                    else
+                    {
+                        pdf_arbol.setLeaf<double>(branch_name, 1.);
+                    }
+                }
+                return true;
+            }
         );
-        cutflow.insert("Cut2", cut3, Right);
+        cutflow.insert("Cut2", save_pdfweights, Right);
+
+    // Cut* cut3 = new LambdaCut(
+    //         "Cut3", [&]() { return arbol.getLeaf<double>("ld_vqqfatjet_xwqq") > 0.6; }
+    //     );
+    //     cutflow.insert("Cut2", cut3, Right);
     // Cut* cut3 = new LambdaCut(
     //         "Cut3", [&]() { return arbol.getLeaf<double>("M_jj") > 800; }
     //     );
@@ -1327,16 +1364,25 @@ int main(int argc, char** argv)
             {
                 // Reset branches and globals
                 arbol.resetBranches();
+                pdf_arbol.resetBranches();
                 cutflow.globals.resetVars();
 
                 nt.GetEntry(entry);
 
                 // Run cutflow
                 std::vector<std::string> cuts_to_check = {
-                    "Cut3"
+                    "SemiMerged_SaveVariables",
+                    "SemiMerged_SavePDFWeights"
                 };
                 std::vector<bool> checkpoints = cutflow.run(cuts_to_check);
-                if (checkpoints.at(0)) { arbol.fill(); }
+                if (checkpoints.at(0))
+                               {
+                                   arbol.fill();
+                               }
+                               if (checkpoints.at(1))
+                               {
+                                   pdf_arbol.fill();
+                               }
 
                 // Update progress bar
                 bar.progress(looper.n_events_processed, looper.n_events_total);
@@ -1351,5 +1397,6 @@ int main(int argc, char** argv)
         cutflow.write(cli.output_dir);
     }
     arbol.write();
+    pdf_arbol.write();
     return 0;
 }

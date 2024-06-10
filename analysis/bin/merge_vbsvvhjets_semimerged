@@ -63,30 +63,31 @@ BKG_SAMPLE_MAP = {
 
 SIG_SAMPLE_MAP = {
     "SSVBSWWH": {
-        "2016preVFP":  ["VBSWWH_SS_VBSCuts*"],
-        "2016postVFP": ["VBSWWH_SS_VBSCuts*"],
-        "2017":        ["VBSWWH_SS_VBSCuts*"],
-        "2018":        ["VBSWWH_SS_VBSCuts*"]
+        "2016preVFP":  ["VBSWWH_SSWW_MJJ-100*"],
+        "2016postVFP": ["VBSWWH_SSWW_MJJ-100*"],
+        "2017":        ["VBSWWH_SSWW_MJJ-100*"],
+        "2018":        ["VBSWWH_SSWW_MJJ-100*"]
     },
     "OSVBSWWH": {
-        "2016preVFP":  ["VBSWWH_OS_VBSCuts*"],
-        "2016postVFP": ["VBSWWH_OS_VBSCuts*"],
-        "2017":        ["VBSWWH_OS_VBSCuts*"],
-        "2018":        ["VBSWWH_OS_VBSCuts*"]
+        "2016preVFP":  ["VBSWWH_OSWW_MJJ-100*"],
+        "2016postVFP": ["VBSWWH_OSWW_MJJ-100*"],
+        "2017":        ["VBSWWH_OSWW_MJJ-100*"],
+        "2018":        ["VBSWWH_OSWW_MJJ-100*"]
     },
     "VBSWZH": {
-        "2016preVFP":  ["VBSWZH_VBSCuts*"],
-        "2016postVFP": ["VBSWZH_VBSCuts*"],
-        "2017":        ["VBSWZH_VBSCuts*"],
-        "2018":        ["VBSWZH_VBSCuts*"]
+        "2016preVFP":  ["VBSWZH_MJJ-100*"],
+        "2016postVFP": ["VBSWZH_MJJ-100*"],
+        "2017":        ["VBSWZH_MJJ-100*"],
+        "2018":        ["VBSWZH_MJJ-100*"]
     },
     "VBSZZH": {
-        "2016preVFP":  ["VBSZZH_VBSCuts*"],
-        "2016postVFP": ["VBSZZH_VBSCuts*"],
-        "2017":        ["VBSZZH_VBSCuts*"],
-        "2018":        ["VBSZZH_VBSCuts*"]
+        "2016preVFP":  ["VBSZZH_MJJ-100*"],
+        "2016postVFP": ["VBSZZH_MJJ-100*"],
+        "2017":        ["VBSZZH_MJJ-100*"],
+        "2018":        ["VBSZZH_MJJ-100*"]
     },
 }
+
 
 OTHER_SAMPLE_MAP = {
     "data": {
@@ -96,11 +97,17 @@ OTHER_SAMPLE_MAP = {
         "2018":        ["*Run201*"]
     },
     "VBSVVH": {
-        "2016preVFP":  ["VBSWWH_SS_VBSCuts*", "VBSWWH_OS_VBSCuts*", "VBSWZH_VBSCuts*", "VBSZZH_VBSCuts*"],
-        "2016postVFP": ["VBSWWH_SS_VBSCuts*", "VBSWWH_OS_VBSCuts*", "VBSWZH_VBSCuts*", "VBSZZH_VBSCuts*"],
-        "2017":        ["VBSWWH_SS_VBSCuts*", "VBSWWH_OS_VBSCuts*", "VBSWZH_VBSCuts*", "VBSZZH_VBSCuts*"],
-        "2018":        ["VBSWWH_SS_VBSCuts*", "VBSWWH_OS_VBSCuts*", "VBSWZH_VBSCuts*", "VBSZZH_VBSCuts*"]
+        "2016preVFP":  ["VBSWWH_SSWW_MJJ-100*", "VBSWWH_OSWW_MJJ-100*", "VBSWZH_MJJ-100*", "VBSZZH_MJJ-100*"],
+        "2016postVFP": ["VBSWWH_SSWW_MJJ-100*", "VBSWWH_OSWW_MJJ-100*", "VBSWZH_MJJ-100*", "VBSZZH_MJJ-100*"],
+        "2017":        ["VBSWWH_SSWW_MJJ-100*", "VBSWWH_OSWW_MJJ-100*", "VBSWZH_MJJ-100*", "VBSZZH_MJJ-100*"],
+        "2018":        ["VBSWWH_SSWW_MJJ-100*", "VBSWWH_OSWW_MJJ-100*", "VBSWZH_MJJ-100*", "VBSZZH_MJJ-100*"]
     },
+    "Private_C2W_C2Z": {
+        "2016preVFP":  ["Private_C2W_C2Z*"],
+        "2016postVFP": ["Private_C2W_C2Z*"],
+        "2017":        ["Private_C2W_C2Z*"],
+        "2018":        ["Private_C2W_C2Z*"]
+    }
 }
 
 if __name__ == "__main__":
@@ -152,6 +159,7 @@ if __name__ == "__main__":
     for group_name, cutflow in cutflows.items():
         cutflow.write_cflow(f"{output_dir}/Run2/{group_name}_cutflow.cflow")
     # Write CSV
+
     for terminal_cut_name in args.terminals if args.terminals else cutflows.terminal_cut_names:
         cutflows.write_csv(f"{output_dir}/Run2/cutflow_{terminal_cut_name}.csv", terminal_cut_name)
         cutflows.write_txt(f"{output_dir}/Run2/cutflow_{terminal_cut_name}.txt", terminal_cut_name)

@@ -38,8 +38,7 @@
     ],
     "presel": {
         "hbbfatjet_xbb": [0.8, 0.8, 1],
-        "ld_vqqfatjet_xwqq": [0.6, 0.6, 1],
-        "ld_vqqfatjet_xvqq": [0.6, 0.6, 1]
+        "ld_vqqfatjet_xwqq": [0.6, 0.6, 1]
 
 
     }

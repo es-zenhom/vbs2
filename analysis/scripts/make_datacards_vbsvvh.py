@@ -218,7 +218,7 @@ vbsvvh = PandasAnalysis(
 vbsvvh.df["unity"] = 1 # IMPORTANT
 vbsvvh.df["objsel"] = True
 vbsvvh.df["presel"] = vbsvvh.df.eval(
-    "objsel and hbbfatjet_xbb > 0.8 and ld_vqqfatjet_xwqq > 0.6 and ld_vqqfatjet_xvqq > 0.6"
+    "objsel and hbbfatjet_xbb > 0.8 and ld_vqqfatjet_xwqq > 0.6"
 )
 print("Check hbbfatjet_xbb data:", vbsvvh.df['hbbfatjet_xbb'].describe())
 print("Entries above 0.8:", (vbsvvh.df['hbbfatjet_xbb'] > 0.8).sum())

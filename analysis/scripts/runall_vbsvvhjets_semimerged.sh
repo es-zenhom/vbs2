@@ -1,4 +1,4 @@
-TAG=abcdnet_v4
+TAG=abcdnet_v6
 N_WORKERS=48
 
 BASEDIR=/home/users/eslam.zenhom/public_html/uf_work/vbs2/analysis/studies
