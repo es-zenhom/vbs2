@@ -27,6 +27,32 @@ mkdir -p $BASEDIR
 ./bin/merge_vbsvvhjets_semimerged vbsvvhjets_semimerged --basedir=$BASEDIR --tag=${TAG}_jer_up
 ./bin/merge_vbsvvhjets_semimerged vbsvvhjets_semimerged --basedir=$BASEDIR --tag=${TAG}_jer_dn
 
+# Run JMR AND JMS (leaonardo additon)
+
+##JMR
+./bin/run vbsvvhjets_semimerged --n_workers=$N_WORKERS --basedir=$BASEDIR --skimdir=$SKIMDIR --skimtag=$SKIMTAG --data --tag=${TAG}_jmr_up --var=jmr_up --no_make
+./bin/run vbsvvhjets_semimerged --n_workers=$N_WORKERS --basedir=$BASEDIR --skimdir=$SKIMDIR --skimtag=$SKIMTAG --data --tag=${TAG}_jmr_dn --var=jmr_dn --no_make
+
+for VARDIR in $BASEDIR/vbsvvhjets_semimerged/output_${TAG}_jmr*; do
+    cp -R -n $BASEDIR/vbsvvhjets_semimerged/output_${TAG}/* $VARDIR/
+done
+
+./bin/merge_vbsvvhjets_semimerged vbsvvhjets_semimerged --basedir=$BASEDIR --tag=${TAG}_jmr_up
+./bin/merge_vbsvvhjets_semimerged vbsvvhjets_semimerged --basedir=$BASEDIR --tag=${TAG}_jmr_dn
+
+
+##JMS
+./bin/run vbsvvhjets_semimerged --n_workers=$N_WORKERS --basedir=$BASEDIR --skimdir=$SKIMDIR --skimtag=$SKIMTAG --data --tag=${TAG}_jms_up --var=jms_up --no_make
+./bin/run vbsvvhjets_semimerged --n_workers=$N_WORKERS --basedir=$BASEDIR --skimdir=$SKIMDIR --skimtag=$SKIMTAG --data --tag=${TAG}_jms_dn --var=jms_dn --no_make
+
+for VARDIR in $BASEDIR/vbsvvhjets_semimerged/output_${TAG}_jms*; do
+    cp -R -n $BASEDIR/vbsvvhjets_semimerged/output_${TAG}/* $VARDIR/
+done
+
+./bin/merge_vbsvvhjets_semimerged vbsvvhjets_semimerged --basedir=$BASEDIR --tag=${TAG}_jms_up
+./bin/merge_vbsvvhjets_semimerged vbsvvhjets_semimerged --basedir=$BASEDIR --tag=${TAG}_jms_dn
+
+
 # Run all 22 JEC variations (11 sources x 2 for up/down)...
 ./bin/run vbsvvhjets_semimerged --n_workers=$N_WORKERS --basedir=$BASEDIR --skimdir=$SKIMDIR --skimtag=$SKIMTAG --data --tag=${TAG}_jec_1_up --var=jec_1_up --no_make
 ./bin/run vbsvvhjets_semimerged --n_workers=$N_WORKERS --basedir=$BASEDIR --skimdir=$SKIMDIR --skimtag=$SKIMTAG --data --tag=${TAG}_jec_1_dn --var=jec_1_dn --no_make
