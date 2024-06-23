@@ -168,8 +168,8 @@ def get_jet_energy_systs(nominal_cflow, up_cflow, dn_cflow, signal_regions, name
     for SR, cut_name in signal_regions.items():
         systs.add_syst(
             max(
-                syst_up_cutflow[cut_name].n_pass,
-                syst_dn_cutflow[cut_name].n_pass
+                abs(syst_up_cutflow[cut_name].n_pass),
+                abs(syst_dn_cutflow[cut_name].n_pass)
             ),
             signal_region=SR
         )
@@ -525,8 +525,36 @@ jer_systs = get_jet_energy_systs(
     "CMS_res_j_13TeV"
 )
 SIG_SYSTS_LIMIT.add_row(jer_systs)
-# --------------------------------------------------------------------------------------
 
+# -- Jet energy resolution uncertainty -------------------------------------------------
+jmr_systs = get_jet_energy_systs(
+    f"../analysis/studies/vbsvvhjets_semimerged/output_{TAG}/Run2/VBSVVH_cutflow.cflow",
+    f"../analysis/studies/vbsvvhjets_semimerged/output_{TAG}_jmr_up/Run2/VBSVVH_cutflow.cflow",
+    f"../analysis/studies/vbsvvhjets_semimerged/output_{TAG}_jmr_dn/Run2/VBSVVH_cutflow.cflow",
+    {
+        "regionA": "SemiMerged_RegionA",
+        "regionB": "SemiMerged_RegionB",
+        "regionC": "SemiMerged_RegionC",
+        "regionD": "SemiMerged_RegionD",
+    },
+    "CMS_jmr_pnetreg_13TeV"
+)
+SIG_SYSTS_LIMIT.add_row(jmr_systs)
+# --------------------------------------------------------------------------------------
+jms_systs = get_jet_energy_systs(
+    f"../analysis/studies/vbsvvhjets_semimerged/output_{TAG}/Run2/VBSVVH_cutflow.cflow",
+    f"../analysis/studies/vbsvvhjets_semimerged/output_{TAG}_jmr_up/Run2/VBSVVH_cutflow.cflow",
+    f"../analysis/studies/vbsvvhjets_semimerged/output_{TAG}_jmr_dn/Run2/VBSVVH_cutflow.cflow",
+    {
+        "regionA": "SemiMerged_RegionA",
+        "regionB": "SemiMerged_RegionB",
+        "regionC": "SemiMerged_RegionC",
+        "regionD": "SemiMerged_RegionD",
+    },
+    "CMS_jms_pnetreg_13TeV"
+)
+SIG_SYSTS_LIMIT.add_row(jms_systs)
+# --------------------------------------------------------------------------------------
 
 # -- Luminosity ------------------------------------------------------------------------   first data crad created
 lumi_systs = Systematic("lumi_13TeV_correlated", ABCD_REGIONS)
