@@ -366,7 +366,7 @@ if __name__ == "__main__":
             
             pdf_quadrature_sum = np.zeros(len(sig_df[sig_df[R]]))
             for i in range(1, 101):
-                pdf_variation = pdf_df[sig_df[sig_df[R]].index][f"lhe_pdf_{i}"]
+                pdf_variation = pdf_df.loc[sig_df[sig_df[R]].index, f"lhe_pdf_{i}"]
                 pdf_quadrature_sum += (pdf_variation - 1)**2
             
             pdf_quadrature_sum = np.sqrt(pdf_quadrature_sum)
