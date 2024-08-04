@@ -4,14 +4,14 @@ class Datacard:
         self.n_obs = len(obs)
 
         self.bin_labels = [f"bin{i+1}" for i in range(self.n_obs)]
-        
+
         self.sig_labels = []
         self.sig_yields = [[] for _ in range(self.n_obs)]
         for sig_label, sig_yields in sig.items():
             self.sig_labels.append(sig_label)
             for bin_i, sig_yield in enumerate(sig_yields):
                 self.sig_yields[bin_i].append(sig_yield)
-                
+
         self.bkg_labels = []
         self.bkg_yields = [[] for _ in range(self.n_obs)]
         for bkg_label, bkg_yields in bkg.items():
@@ -21,7 +21,7 @@ class Datacard:
 
         self.n_sig = len(self.sig_labels)
         self.n_bkg = len(self.bkg_labels)
-        
+
         self.column_width = max([len(l) for l in self.sig_labels + self.bkg_labels])+2
         self.column_width = max(self.column_width, 12)
 
@@ -40,7 +40,7 @@ class Datacard:
                     raise ValueError(
                         "systs must be labled with a string (assume lnN) or (name, dist) pairs"
                     )
-                
+
         self.syst_labels = []
         self.systs = []
         n_samples = self.n_sig + self.n_bkg
@@ -51,22 +51,22 @@ class Datacard:
                 if syst_label not in self.syst_labels:
                     self.syst_labels.append(syst_label)
                     self.systs.append([f"{'-':>{cw}}" for _ in range(self.n_obs*(n_samples))])
-                
+
                 # Get index of syst label
                 label_i = self.syst_labels.index(syst_label)
-                
+
                 # Assign syst values
                 if sample_label in self.sig_labels:
                     for value_i, syst_value in enumerate(systs):
                         if syst_value >= 0:
                             syst_i = value_i + self.sig_labels.index(sample_label)
-                            self.systs[label_i][syst_i] = f"{syst_value:{cw}.4f}" 
+                            self.systs[label_i][syst_i] = f"{syst_value:{cw}.4f}"
                 elif sample_label in self.bkg_labels:
                     for value_i, syst_value in enumerate(systs):
                         if syst_value >= 0:
                             syst_i = self.n_obs*self.n_sig + value_i + self.bkg_labels.index(sample_label)
-                            self.systs[label_i][syst_i] = f"{syst_value:{cw}.4f}"  
-                    
+                            self.systs[label_i][syst_i] = f"{syst_value:{cw}.4f}"
+
         hw = max([len(l) for l in self.syst_labels])+2
         hw = max(hw, 12)
         for syst_label, syst_dist in syst_dists.items():
@@ -75,7 +75,7 @@ class Datacard:
 
         self.header_width = max([len(l) for l in self.syst_labels])+2
         self.header_width = max(self.header_width, hw)
-        
+
         self.content = None
         self.fill()
 
@@ -88,6 +88,7 @@ class Datacard:
         content += f"imax {self.n_obs} number of channels\n"
         content += f"jmax {self.n_bkg} number of backgrounds\n"
         content += f"kmax * number of nuisance parameters\n"
+        content += f"shapes * * FAKE\n"
         content += hline
         # Observed
         content += f"{'bin':<{hw}}"
@@ -121,9 +122,9 @@ class Datacard:
             content +=  "".join(syst_values)
             content += "\n"
         content += hline
-            
+
         self.content = content
-        
+
     def write(self, output_dat):
         with open(output_dat, "w") as dat_out:
             dat_out.write(self.content)
@@ -139,7 +140,13 @@ class DatacardABCD(Datacard):
         cw = self.column_width
         hw = self.header_width
         # Rateparams
+        up1 = self.obs[1] + 3*(self.obs[1]**0.5)
+        up2 = self.obs[2] + 3*(self.obs[2]**0.5)
+        up3 = self.obs[3] + 3*(self.obs[3]**0.5)
+        dn1 = self.obs[1] - 3*(self.obs[1]**0.5)
+        dn2 = self.obs[2] - 3*(self.obs[2]**0.5)
+        dn3 = self.obs[3] - 3*(self.obs[3]**0.5)
         self.content += f"{self.rparam_labels[0]+' rateParam':<{hw}}  A  {self.bkg_labels[0]:>{cw}} (@0*@1/@2) {','.join(self.rparam_labels[1:])}\n"
-        self.content += f"{self.rparam_labels[1]+' rateParam':<{hw}}  B  {self.bkg_labels[0]:>{cw}} {self.obs[1]}\n"
-        self.content += f"{self.rparam_labels[2]+' rateParam':<{hw}}  C  {self.bkg_labels[0]:>{cw}} {self.obs[2]}\n"
-        self.content += f"{self.rparam_labels[3]+' rateParam':<{hw}}  D  {self.bkg_labels[0]:>{cw}} {self.obs[3]}"
+        self.content += f"{self.rparam_labels[1]+' rateParam':<{hw}}  B  {self.bkg_labels[0]:>{cw}} {self.obs[1]:>4} [{round(max(0.0, dn1))},{round(up1)}]\n"
+        self.content += f"{self.rparam_labels[2]+' rateParam':<{hw}}  C  {self.bkg_labels[0]:>{cw}} {self.obs[2]:>4} [{round(max(0.0, dn2))},{round(up2)}]\n"
+        self.content += f"{self.rparam_labels[3]+' rateParam':<{hw}}  D  {self.bkg_labels[0]:>{cw}} {self.obs[3]:>4} [{round(max(0.0, dn3))},{round(up3)}]"

@@ -555,8 +555,11 @@ public:
             double pnet_xcc = nt.FatJet_particleNetMD_Xcc().at(fatjet_i);
             double pnet_qcd = nt.FatJet_particleNetMD_QCD().at(fatjet_i);
     	    double pnet_mass = nt.FatJet_particleNet_mass().at(fatjet_i);
-            if (!nt.isData()) pnet_mass = jms_jmr(pnet_mass, nt.luminosityBlock(), nt.event(), (nt.year() == 2016 && gconf.isAPV) ? -nt.year() : nt.year(), cli.variation);
-
+            // if (!nt.isData()) pnet_mass = jms_jmr(pnet_mass, nt.luminosityBlock(), nt.event(), (nt.year() == 2016 && gconf.isAPV) ? -nt.year() : nt.year(), cli.variation);
+            if (!nt.isData()) {
+                pnet_mass = jms_jmr(pnet_mass, nt.luminosityBlock(), nt.event(), (nt.year() == 2016 && gconf.isAPV) ? -nt.year() : nt.year(), cli.variation);
+                std::cout << "Modified pnet_mass: " << pnet_mass << std::endl;
+            }
             // Store good fat jets
             good_fatjet_p4s.push_back(fatjet_p4);
             good_fatjet_idxs.push_back(fatjet_i);

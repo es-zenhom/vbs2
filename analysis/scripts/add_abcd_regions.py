@@ -42,7 +42,7 @@ args = cli.parse_args()
 # Get babies
 babies = sorted(glob.glob(f"{args.basedir}/{args.study}/output_{args.tag}/Run2/inferences/*.root"))
 sig_babies = [baby for baby in babies if "VBS" in baby]
-bkg_babies = [baby for baby in babies if "VBS" not in baby and "data.root" not in baby]
+bkg_babies = [baby for baby in babies if "VBS" not in baby and "data.root" not in baby and "Private" not in baby]
 data_babies = [baby for baby in babies if "data.root" in baby]
 print("Signal:")
 print("\n".join(sig_babies))
@@ -61,7 +61,9 @@ vbs = PandasAnalysis(
         "xsec_sf",
         "pu_sf",
         "prefire_sf",
-        "puid_sf"
+        "puid_sf",
+        "xwqq_ld_vqq_sf",
+        "xbb_sf"
     ]
 )
 
@@ -98,10 +100,10 @@ for name in vbs.df.name.unique():
         "SemiMerged_DivertCutflow",
         n_pass=0,
         n_pass_weighted=0,
-        n_fail=cutflow["Cut3"].n_pass,
-        n_fail_weighted=cutflow["Cut3"].n_pass,
+        n_fail=cutflow["Cut2"].n_pass,
+        n_fail_weighted=cutflow["Cut2"].n_pass,
     )
-    cutflow.insert("Cut3", base_cut, direction="right")
+    cutflow.insert("Cut2", base_cut, direction="right")
     next_cut = cutflow[base_cut.name].right
     while not next_cut is None:
         zero_cut = Cut(

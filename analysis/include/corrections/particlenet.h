@@ -146,22 +146,22 @@ public:
         };
     };
 
-    double getSF(double pt) 
-    { 
+    double getSF(double pt)
+    {
         return boohftCalib(year_str, pt);
     };
 
-    double getSFUp(double pt) 
-    { 
+    double getSFUp(double pt)
+    {
         return boohftCalib(year_str, pt, "up");
     };
 
-    double getSFDn(double pt) 
-    { 
+    double getSFDn(double pt)
+    {
         return boohftCalib(year_str, pt, "dn");
     };
 };
-
+// https://lutton-vvh-sfbdt.web.cern.ch/H_bb_PNetXbbVsQCD-Eslam_2018/4_fit/
 struct VBSVVHXbbSFs : NanoSFsUL
 {
 private:
@@ -169,130 +169,126 @@ private:
     {
         if (year == "2018")
         {
-            /* Markdown table from web/H_bb_PNetXbbVsQCD-JGuiang_ChangedCut_2018/4_fit/index.html:
-               |       | pT [300, 400) | pT [400, 500) | pT [500, 600) | pT [600, +∞) |
-               | :---: | :---: | :---: | :---: | :---: |
-               | **High Purity** WP | **0.875** [-0.077/+0.071] | **0.895** [-0.102/+0.100] | **1.030** [-0.078/+0.081] | **0.933** [-0.095/+0.093] |
+            /* 2018 bb-tagging SF (SF_flvB)
+               pT [300, 400) | pT [400, 500) | pT [500, 600) | pT [600, +∞)
+               0.952 [-0.055/+0.045] | 1.068 [-0.116/+0.121] | 0.939 [-0.036/+0.032] | 1.038 [-0.035/+0.034]
             */
             if (pt >= 300 && pt < 400)
             {
-                if (var == "nominal") { return 0.875; }
-                else if (var == "up") { return 0.875+0.071; }
-                else if (var == "dn") { return 0.875-0.077; }
-            }
-            else if (pt >= 400 && pt < 500)
-            {
-                if (var == "nominal") { return 0.895; }
-                else if (var == "up") { return 0.895+0.100; }
-                else if (var == "dn") { return 0.895-0.102; }
-            }
-            else if (pt >= 500 && pt < 600)
-            {
-                if (var == "nominal") { return 1.030; }
-                else if (var == "up") { return 1.030+0.081; }
-                else if (var == "dn") { return 1.030-0.078; }
-            }
-            else if (pt >= 600)
-            {
-                if (var == "nominal") { return 0.933; }
-                else if (var == "up") { return 0.933+0.093; }
-                else if (var == "dn") { return 0.933-0.095; }
-            }
-        }
-        if (year == "2017")
-        {
-            /* Markdown table from web/H_bb_PNetXbbVsQCD-JGuiang_ChangedCut_2017/4_fit/index.html:
-               |       | pT [300, 400) | pT [400, 500) | pT [500, 600) | pT [600, +∞) |
-               | :---: | :---: | :---: | :---: | :---: |
-               | **High Purity** WP | **0.996** [-0.225/+0.226] | **1.068** [-0.131/+0.138] | **1.012** [-0.202/+0.202] | **1.062** [-0.061/+0.070] |
-            */
-            if (pt >= 300 && pt < 400)
-            {
-                if (var == "nominal") { return 0.996; }
-                else if (var == "up") { return 0.996+0.226; }
-                else if (var == "dn") { return 0.996-0.225; }
+                if (var == "nominal") { return 0.952; }
+                else if (var == "up") { return 0.952+0.045; }
+                else if (var == "dn") { return 0.952-0.055; }
             }
             else if (pt >= 400 && pt < 500)
             {
                 if (var == "nominal") { return 1.068; }
-                else if (var == "up") { return 1.068+0.138; }
-                else if (var == "dn") { return 1.068-0.131; }
+                else if (var == "up") { return 1.068+0.121; }
+                else if (var == "dn") { return 1.068-0.116; }
             }
             else if (pt >= 500 && pt < 600)
             {
-                if (var == "nominal") { return 1.012; }
-                else if (var == "up") { return 1.012+0.202; }
-                else if (var == "dn") { return 1.012-0.202; }
+                if (var == "nominal") { return 0.939; }
+                else if (var == "up") { return 0.939+0.032; }
+                else if (var == "dn") { return 0.939-0.036; }
             }
             else if (pt >= 600)
             {
-                if (var == "nominal") { return 1.062; }
-                else if (var == "up") { return 1.062+0.070; }
-                else if (var == "dn") { return 1.062-0.061; }
+                if (var == "nominal") { return 1.038; }
+                else if (var == "up") { return 1.038+0.034; }
+                else if (var == "dn") { return 1.038-0.035; }
+            }
+        }
+        if (year == "2017")
+        {
+            /* 2017 bb-tagging SF (SF_flvB)
+               pT [300, 400) | pT [400, 500) | pT [500, 600) | pT [600, +∞)
+               0.985 [-0.140/+0.140] | 1.063 [-0.114/+0.118] | 1.054 [-0.095/+0.098] | 1.077 [-0.074/+0.076]
+            */
+            if (pt >= 300 && pt < 400)
+            {
+                if (var == "nominal") { return 0.985; }
+                else if (var == "up") { return 0.985+0.140; }
+                else if (var == "dn") { return 0.985-0.140; }
+            }
+            else if (pt >= 400 && pt < 500)
+            {
+                if (var == "nominal") { return 1.063; }
+                else if (var == "up") { return 1.063+0.118; }
+                else if (var == "dn") { return 1.063-0.114; }
+            }
+            else if (pt >= 500 && pt < 600)
+            {
+                if (var == "nominal") { return 1.054; }
+                else if (var == "up") { return 1.054+0.098; }
+                else if (var == "dn") { return 1.054-0.095; }
+            }
+            else if (pt >= 600)
+            {
+                if (var == "nominal") { return 1.077; }
+                else if (var == "up") { return 1.077+0.076; }
+                else if (var == "dn") { return 1.077-0.074; }
             }
         }
         if (year == "2016postVFP")
         {
-            /* Markdown table from web/H_bb_PNetXbbVsQCD-JGuiang_ChangedCut_2016/4_fit/index.html:
-               |       | pT [300, 400) | pT [400, 500) | pT [500, 600) | pT [600, +∞) |
-               | :---: | :---: | :---: | :---: | :---: |
-               | **High Purity** WP | **1.027** [-0.096/+0.098] | **1.139** [-0.074/+0.093] | **1.147** [-0.124/+0.137] | **1.279** [-0.223/+0.250] |
+            /* 2016 bb-tagging SF (SF_flvB)
+               pT [300, 400) | pT [400, 500) | pT [500, 600) | pT [600, +∞)
+               0.981 [-0.124/+0.119] | 0.994 [-0.117/+0.119] | 0.992 [-0.093/+0.105] | 1.098 [-0.112/+0.223]
             */
             if (pt >= 300 && pt < 400)
             {
-                if (var == "nominal") { return 1.027; }
-                else if (var == "up") { return 1.027+0.098; }
-                else if (var == "dn") { return 1.027-0.096; }
+                if (var == "nominal") { return 0.981; }
+                else if (var == "up") { return 0.981+0.119; }
+                else if (var == "dn") { return 0.981-0.124; }
             }
             else if (pt >= 400 && pt < 500)
             {
-                if (var == "nominal") { return 1.139; }
-                else if (var == "up") { return 1.139+0.093; }
-                else if (var == "dn") { return 1.139-0.074; }
+                if (var == "nominal") { return 0.994; }
+                else if (var == "up") { return 0.994+0.119; }
+                else if (var == "dn") { return 0.994-0.117; }
             }
             else if (pt >= 500 && pt < 600)
             {
-                if (var == "nominal") { return 1.147; }
-                else if (var == "up") { return 1.147+0.137; }
-                else if (var == "dn") { return 1.147-0.124; }
+                if (var == "nominal") { return 0.992; }
+                else if (var == "up") { return 0.992+0.105; }
+                else if (var == "dn") { return 0.992-0.093; }
             }
             else if (pt >= 600)
             {
-                if (var == "nominal") { return 1.279; }
-                else if (var == "up") { return 1.279+0.250; }
-                else if (var == "dn") { return 1.279-0.223; }
+                if (var == "nominal") { return 1.098; }
+                else if (var == "up") { return 1.098+0.223; }
+                else if (var == "dn") { return 1.098-0.112; }
             }
         }
         if (year == "2016preVFP")
         {
-            /* Markdown table from web/H_bb_PNetXbbVsQCD-JGuiang_ChangedCut_2016APV/4_fit/index.html:
-               |       | pT [300, 400) | pT [400, 500) | pT [500, 600) | pT [600, +∞) |
-               | :---: | :---: | :---: | :---: | :---: |
-               | **High Purity** WP | **1.163** [-0.107/+0.119] | **1.151** [-0.129/+0.137] | **1.210** [-0.211/+0.232] | **1.288** [-0.324/+0.345] |
+            /* 2016APV bb-tagging SF (SF_flvB)
+               pT [300, 400) | pT [400, 500) | pT [500, 600) | pT [600, +∞)
+               0.980 [-0.097/+0.109] | 0.993 [-0.069/+0.094] | 1.046 [-0.074/+0.121] | 1.099 [-0.129/+0.239]
             */
             if (pt >= 300 && pt < 400)
             {
-                if (var == "nominal") { return 1.163; }
-                else if (var == "up") { return 1.163+0.119; }
-                else if (var == "dn") { return 1.163-0.107; }
+                if (var == "nominal") { return 0.980; }
+                else if (var == "up") { return 0.980+0.109; }
+                else if (var == "dn") { return 0.980-0.097; }
             }
             else if (pt >= 400 && pt < 500)
             {
-                if (var == "nominal") { return 1.151; }
-                else if (var == "up") { return 1.151+0.137; }
-                else if (var == "dn") { return 1.151-0.129; }
+                if (var == "nominal") { return 0.993; }
+                else if (var == "up") { return 0.993+0.094; }
+                else if (var == "dn") { return 0.993-0.069; }
             }
             else if (pt >= 500 && pt < 600)
             {
-                if (var == "nominal") { return 1.210; }
-                else if (var == "up") { return 1.210+0.232; }
-                else if (var == "dn") { return 1.210-0.211; }
+                if (var == "nominal") { return 1.046; }
+                else if (var == "up") { return 1.046+0.121; }
+                else if (var == "dn") { return 1.046-0.074; }
             }
             else if (pt >= 600)
             {
-                if (var == "nominal") { return 1.288; }
-                else if (var == "up") { return 1.288+0.345; }
-                else if (var == "dn") { return 1.288-0.324; }
+                if (var == "nominal") { return 1.099; }
+                else if (var == "up") { return 1.099+0.239; }
+                else if (var == "dn") { return 1.099-0.129; }
             }
         }
         return 1.;
@@ -326,243 +322,342 @@ public:
         };
     };
 
-    double getSF(double pt) 
-    { 
+    double getSF(double pt)
+    {
         return boohftCalib(year_str, pt);
     };
 
-    double getSFUp(double pt) 
-    { 
+    double getSFUp(double pt)
+    {
         return boohftCalib(year_str, pt, "up");
     };
 
-    double getSFDn(double pt) 
-    { 
+    double getSFDn(double pt)
+    {
         return boohftCalib(year_str, pt, "dn");
     };
 };
+// struct VBSVVHXbbSFs : NanoSFsUL (old numbers for all merged from jonathan's analysis)
+// {
+// private:
+//     double boohftCalib(std::string year, double pt, std::string var = "nominal")
+//     {
+//         if (year == "2018")
+//         {
+//             /* Markdown table from web/H_bb_PNetXbbVsQCD-JGuiang_ChangedCut_2018/4_fit/index.html:
+//                |       | pT [300, 400) | pT [400, 500) | pT [500, 600) | pT [600, +∞) |
+//                | :---: | :---: | :---: | :---: | :---: |
+//                | **High Purity** WP | **0.875** [-0.077/+0.071] | **0.895** [-0.102/+0.100] | **1.030** [-0.078/+0.081] | **0.933** [-0.095/+0.093] |
+//             */
+//             if (pt >= 300 && pt < 400)
+//             {
+//                 if (var == "nominal") { return 0.875; }
+//                 else if (var == "up") { return 0.875+0.071; }
+//                 else if (var == "dn") { return 0.875-0.077; }
+//             }
+//             else if (pt >= 400 && pt < 500)
+//             {
+//                 if (var == "nominal") { return 0.895; }
+//                 else if (var == "up") { return 0.895+0.100; }
+//                 else if (var == "dn") { return 0.895-0.102; }
+//             }
+//             else if (pt >= 500 && pt < 600)
+//             {
+//                 if (var == "nominal") { return 1.030; }
+//                 else if (var == "up") { return 1.030+0.081; }
+//                 else if (var == "dn") { return 1.030-0.078; }
+//             }
+//             else if (pt >= 600)
+//             {
+//                 if (var == "nominal") { return 0.933; }
+//                 else if (var == "up") { return 0.933+0.093; }
+//                 else if (var == "dn") { return 0.933-0.095; }
+//             }
+//         }
+//         if (year == "2017")
+//         {
+//             /* Markdown table from web/H_bb_PNetXbbVsQCD-JGuiang_ChangedCut_2017/4_fit/index.html:
+//                |       | pT [300, 400) | pT [400, 500) | pT [500, 600) | pT [600, +∞) |
+//                | :---: | :---: | :---: | :---: | :---: |
+//                | **High Purity** WP | **0.996** [-0.225/+0.226] | **1.068** [-0.131/+0.138] | **1.012** [-0.202/+0.202] | **1.062** [-0.061/+0.070] |
+//             */
+//             if (pt >= 300 && pt < 400)
+//             {
+//                 if (var == "nominal") { return 0.996; }
+//                 else if (var == "up") { return 0.996+0.226; }
+//                 else if (var == "dn") { return 0.996-0.225; }
+//             }
+//             else if (pt >= 400 && pt < 500)
+//             {
+//                 if (var == "nominal") { return 1.068; }
+//                 else if (var == "up") { return 1.068+0.138; }
+//                 else if (var == "dn") { return 1.068-0.131; }
+//             }
+//             else if (pt >= 500 && pt < 600)
+//             {
+//                 if (var == "nominal") { return 1.012; }
+//                 else if (var == "up") { return 1.012+0.202; }
+//                 else if (var == "dn") { return 1.012-0.202; }
+//             }
+//             else if (pt >= 600)
+//             {
+//                 if (var == "nominal") { return 1.062; }
+//                 else if (var == "up") { return 1.062+0.070; }
+//                 else if (var == "dn") { return 1.062-0.061; }
+//             }
+//         }
+//         if (year == "2016postVFP")
+//         {
+//             /* Markdown table from web/H_bb_PNetXbbVsQCD-JGuiang_ChangedCut_2016/4_fit/index.html:
+//                |       | pT [300, 400) | pT [400, 500) | pT [500, 600) | pT [600, +∞) |
+//                | :---: | :---: | :---: | :---: | :---: |
+//                | **High Purity** WP | **1.027** [-0.096/+0.098] | **1.139** [-0.074/+0.093] | **1.147** [-0.124/+0.137] | **1.279** [-0.223/+0.250] |
+//             */
+//             if (pt >= 300 && pt < 400)
+//             {
+//                 if (var == "nominal") { return 1.027; }
+//                 else if (var == "up") { return 1.027+0.098; }
+//                 else if (var == "dn") { return 1.027-0.096; }
+//             }
+//             else if (pt >= 400 && pt < 500)
+//             {
+//                 if (var == "nominal") { return 1.139; }
+//                 else if (var == "up") { return 1.139+0.093; }
+//                 else if (var == "dn") { return 1.139-0.074; }
+//             }
+//             else if (pt >= 500 && pt < 600)
+//             {
+//                 if (var == "nominal") { return 1.147; }
+//                 else if (var == "up") { return 1.147+0.137; }
+//                 else if (var == "dn") { return 1.147-0.124; }
+//             }
+//             else if (pt >= 600)
+//             {
+//                 if (var == "nominal") { return 1.279; }
+//                 else if (var == "up") { return 1.279+0.250; }
+//                 else if (var == "dn") { return 1.279-0.223; }
+//             }
+//         }
+//         if (year == "2016preVFP")
+//         {
+//             /* Markdown table from web/H_bb_PNetXbbVsQCD-JGuiang_ChangedCut_2016APV/4_fit/index.html:
+//                |       | pT [300, 400) | pT [400, 500) | pT [500, 600) | pT [600, +∞) |
+//                | :---: | :---: | :---: | :---: | :---: |
+//                | **High Purity** WP | **1.163** [-0.107/+0.119] | **1.151** [-0.129/+0.137] | **1.210** [-0.211/+0.232] | **1.288** [-0.324/+0.345] |
+//             */
+//             if (pt >= 300 && pt < 400)
+//             {
+//                 if (var == "nominal") { return 1.163; }
+//                 else if (var == "up") { return 1.163+0.119; }
+//                 else if (var == "dn") { return 1.163-0.107; }
+//             }
+//             else if (pt >= 400 && pt < 500)
+//             {
+//                 if (var == "nominal") { return 1.151; }
+//                 else if (var == "up") { return 1.151+0.137; }
+//                 else if (var == "dn") { return 1.151-0.129; }
+//             }
+//             else if (pt >= 500 && pt < 600)
+//             {
+//                 if (var == "nominal") { return 1.210; }
+//                 else if (var == "up") { return 1.210+0.232; }
+//                 else if (var == "dn") { return 1.210-0.211; }
+//             }
+//             else if (pt >= 600)
+//             {
+//                 if (var == "nominal") { return 1.288; }
+//                 else if (var == "up") { return 1.288+0.345; }
+//                 else if (var == "dn") { return 1.288-0.324; }
+//             }
+//         }
+//         return 1.;
+//     }
+// public:
+//     std::string year_str;
+//
+//     VBSVVHXbbSFs() { /* Do nothing */ };
+//
+//     void init(TString file_name)
+//     {
+//         NanoSFsUL::init(file_name);
+//
+//         switch (campaign)
+//         {
+//         case (RunIISummer20UL16APV):
+//             year_str = "2016preVFP";
+//             break;
+//         case (RunIISummer20UL16):
+//             year_str = "2016postVFP";
+//             break;
+//         case (RunIISummer20UL17):
+//             year_str = "2017";
+//             break;
+//         case (RunIISummer20UL18):
+//             year_str = "2018";
+//             break;
+//         default:
+//             return;
+//             break;
+//         };
+//     };
+//
+//     double getSF(double pt)
+//     {
+//         return boohftCalib(year_str, pt);
+//     };
+//
+//     double getSFUp(double pt)
+//     {
+//         return boohftCalib(year_str, pt, "up");
+//     };
+//
+//     double getSFDn(double pt)
+//     {
+//         return boohftCalib(year_str, pt, "dn");
+//     };
+// };
 
 struct VBSVVHXWqqSFs : NanoSFsUL
 {
 private:
     double boohftCalib(std::string year, double pt, std::string wp, std::string var)
     {
-        // From these slides: https://docs.google.com/presentation/d/1Y39avmA0bSe2hpPdqdM6RZr6s9N_h3iQEVLihOwebJY/edit?usp=sharing
+        // https://docs.google.com/presentation/d/1Y39avmA0bSe2hpPdqdM6RZr6s9N_h3iQEVLihOwebJY/edit#slide=id.g28c8a4fdb21_1_0
         float unc_mult = (pt > 800) ? 2.0 : 1.0;
 
         if (year == "2018")
         {
+            /* 2018 Wqq-tagging SF (WP 0.59)
+               pT [200, 300) | pT [300, 400) | pT [400, 800)
+               0.92 [±0.02] | 0.91 [±0.02] | 0.86 [±0.04]
+            */
             if (pt >= 200 && pt < 300)
             {
-                if (wp == "trail")
+                if (wp == "trail" || wp == "lead")
                 {
-                    // XWqq > 0.7 (for trailing Vqq fat jet)
-                    if (var == "nominal") { return 0.91; }
-                    else if (var == "up") { return 0.91+0.02; }
-                    else if (var == "dn") { return 0.91-0.02; }
-                }
-                else if (wp == "lead")
-                {
-                    // XWqq > 0.8 (for leading Vqq fat jet)
-                    if (var == "nominal") { return 0.88; }
-                    else if (var == "up") { return 0.88+0.02; }
-                    else if (var == "dn") { return 0.88-0.02; }
+                    if (var == "nominal") { return 0.92; }
+                    else if (var == "up") { return 0.92 + 0.02; }
+                    else if (var == "dn") { return 0.92 - 0.02; }
                 }
             }
             else if (pt >= 300 && pt < 400)
             {
-                if (wp == "trail")
+                if (wp == "trail" || wp == "lead")
                 {
-                    // XWqq > 0.7 (for trailing Vqq fat jet)
-                    if (var == "nominal") { return 0.90; }
-                    else if (var == "up") { return 0.90+0.02; }
-                    else if (var == "dn") { return 0.90-0.02; }
-                }
-                else if (wp == "lead")
-                {
-                    // XWqq > 0.8 (for leading Vqq fat jet)
-                    if (var == "nominal") { return 0.87; }
-                    else if (var == "up") { return 0.87+0.02; }
-                    else if (var == "dn") { return 0.87-0.02; }
+                    if (var == "nominal") { return 0.91; }
+                    else if (var == "up") { return 0.91 + 0.02; }
+                    else if (var == "dn") { return 0.91 - 0.02; }
                 }
             }
             else if (pt >= 400)
             {
-                if (wp == "trail")
+                if (wp == "trail" || wp == "lead")
                 {
-                    // XWqq > 0.7 (for trailing Vqq fat jet)
-                    if (var == "nominal") { return 0.85; }
-                    else if (var == "up") { return 0.85+0.04*unc_mult; }
-                    else if (var == "dn") { return 0.85-0.04*unc_mult; }
-                }
-                else if (wp == "lead")
-                {
-                    // XWqq > 0.8 (for leading Vqq fat jet)
-                    if (var == "nominal") { return 0.82; }
-                    else if (var == "up") { return 0.82+0.04*unc_mult; }
-                    else if (var == "dn") { return 0.82-0.04*unc_mult; }
+                    if (var == "nominal") { return 0.86; }
+                    else if (var == "up") { return 0.86 + 0.04 * unc_mult; }
+                    else if (var == "dn") { return 0.86 - 0.04 * unc_mult; }
                 }
             }
         }
         else if (year == "2017")
         {
+            /* 2017 Wqq-tagging SF (WP 0.579)
+               pT [200, 300) | pT [300, 400) | pT [400, 800)
+               0.98 [+0.04/-0.04] | 0.96 [+0.02/-0.02] | 0.99 [+0.04/-0.05]
+            */
             if (pt >= 200 && pt < 300)
             {
-                if (wp == "trail")
+                if (wp == "trail" || wp == "lead")
                 {
-                    // XWqq > 0.7 (for trailing Vqq fat jet)
-                    if (var == "nominal") { return 0.96; }
-                    else if (var == "up") { return 0.96+0.02; }
-                    else if (var == "dn") { return 0.96-0.02; }
-                }
-                else if (wp == "lead")
-                {
-                    // XWqq > 0.8 (for leading Vqq fat jet)
-                    if (var == "nominal") { return 0.91; }
-                    else if (var == "up") { return 0.91+0.04; }
-                    else if (var == "dn") { return 0.91-0.04; }
+                    if (var == "nominal") { return 0.98; }
+                    else if (var == "up") { return 0.98 + 0.04; }
+                    else if (var == "dn") { return 0.98 - 0.04; }
                 }
             }
             else if (pt >= 300 && pt < 400)
             {
-                if (wp == "trail")
+                if (wp == "trail" || wp == "lead")
                 {
-                    // XWqq > 0.7 (for trailing Vqq fat jet)
-                    if (var == "nominal") { return 0.94; }
-                    else if (var == "up") { return 0.94+0.02; }
-                    else if (var == "dn") { return 0.94-0.02; }
-                }
-                else if (wp == "lead")
-                {
-                    // XWqq > 0.8 (for leading Vqq fat jet)
-                    if (var == "nominal") { return 0.91; }
-                    else if (var == "up") { return 0.91+0.02; }
-                    else if (var == "dn") { return 0.91-0.03; }
+                    if (var == "nominal") { return 0.96; }
+                    else if (var == "up") { return 0.96 + 0.02; }
+                    else if (var == "dn") { return 0.96 - 0.02; }
                 }
             }
             else if (pt >= 400)
             {
-                if (wp == "trail")
+                if (wp == "trail" || wp == "lead")
                 {
-                    // XWqq > 0.7 (for trailing Vqq fat jet)
-                    if (var == "nominal") { return 0.93; }
-                    else if (var == "up") { return 0.93+0.04*unc_mult; }
-                    else if (var == "dn") { return 0.93-0.04*unc_mult; }
-                }
-                else if (wp == "lead")
-                {
-                    // XWqq > 0.8 (for leading Vqq fat jet)
-                    if (var == "nominal") { return 0.91; }
-                    else if (var == "up") { return 0.91+0.05*unc_mult; }
-                    else if (var == "dn") { return 0.91-0.04*unc_mult; }
+                    if (var == "nominal") { return 0.99; }
+                    else if (var == "up") { return 0.99 + 0.05 * unc_mult; }
+                    else if (var == "dn") { return 0.99 - 0.04 * unc_mult; }
                 }
             }
         }
         else if (year == "2016postVFP")
         {
+            /* 2016 Wqq-tagging SF (WP 0.637)
+               pT [200, 300) | pT [300, 400) | pT [400, 800)
+               0.95 [+0.06/-0.05] | 0.91 [+0.04/-0.04] | 0.89 [+0.07/-0.07]
+            */
             if (pt >= 200 && pt < 300)
             {
-                if (wp == "trail")
+                if (wp == "trail" || wp == "lead")
                 {
-                    // XWqq > 0.7 (for trailing Vqq fat jet)
-                    if (var == "nominal") { return 0.96; }
-                    else if (var == "up") { return 0.96+0.05; }
-                    else if (var == "dn") { return 0.96-0.05; }
-                }
-                else if (wp == "lead")
-                {
-                    // XWqq > 0.8 (for leading Vqq fat jet)
-                    if (var == "nominal") { return 0.89; }
-                    else if (var == "up") { return 0.89+0.06; }
-                    else if (var == "dn") { return 0.89-0.05; }
+                    if (var == "nominal") { return 0.95; }
+                    else if (var == "up") { return 0.95 + 0.05; }
+                    else if (var == "dn") { return 0.95 - 0.06; }
                 }
             }
             else if (pt >= 300 && pt < 400)
             {
-                if (wp == "trail")
+                if (wp == "trail" || wp == "lead")
                 {
-                    // XWqq > 0.7 (for trailing Vqq fat jet)
-                    if (var == "nominal") { return 0.89; }
-                    else if (var == "up") { return 0.89+0.04; }
-                    else if (var == "dn") { return 0.89-0.04; }
-                }
-                else if (wp == "lead")
-                {
-                    // XWqq > 0.8 (for leading Vqq fat jet)
-                    if (var == "nominal") { return 0.87; }
-                    else if (var == "up") { return 0.87+0.04; }
-                    else if (var == "dn") { return 0.87-0.04; }
+                    if (var == "nominal") { return 0.91; }
+                    else if (var == "up") { return 0.91 + 0.04; }
+                    else if (var == "dn") { return 0.91 - 0.04; }
                 }
             }
             else if (pt >= 400)
             {
-                if (wp == "trail")
+                if (wp == "trail" || wp == "lead")
                 {
-                    // XWqq > 0.7 (for trailing Vqq fat jet)
-                    if (var == "nominal") { return 0.85; }
-                    else if (var == "up") { return 0.85+0.07*unc_mult; }
-                    else if (var == "dn") { return 0.85-0.06*unc_mult; }
-                }
-                else if (wp == "lead")
-                {
-                    // XWqq > 0.8 (for leading Vqq fat jet)
-                    if (var == "nominal") { return 0.85; }
-                    else if (var == "up") { return 0.85+0.07*unc_mult; }
-                    else if (var == "dn") { return 0.85-0.07*unc_mult; }
+                    if (var == "nominal") { return 0.89; }
+                    else if (var == "up") { return 0.89 + 0.07 * unc_mult; }
+                    else if (var == "dn") { return 0.89 - 0.07 * unc_mult; }
                 }
             }
         }
         else if (year == "2016preVFP")
         {
+            /* 2016APV Wqq-tagging SF (WP 0.637)
+               pT [200, 300) | pT [300, 400) | pT [400, 800)
+               0.92 [+0.04/-0.07] | 0.95 [+0.03/-0.04] | 0.94 [+0.06/-0.06]
+            */
             if (pt >= 200 && pt < 300)
             {
-                if (wp == "trail")
+                if (wp == "trail" || wp == "lead")
                 {
-                    // XWqq > 0.7 (for trailing Vqq fat jet)
                     if (var == "nominal") { return 0.92; }
-                    else if (var == "up") { return 0.92+0.04; }
-                    else if (var == "dn") { return 0.92-0.04; }
-                }
-                else if (wp == "lead")
-                {
-                    // XWqq > 0.8 (for leading Vqq fat jet)
-                    if (var == "nominal") { return 0.87; }
-                    else if (var == "up") { return 0.87+0.04; }
-                    else if (var == "dn") { return 0.87-0.03; }
+                    else if (var == "up") { return 0.92 + 0.04; }
+                    else if (var == "dn") { return 0.92 - 0.07; }
                 }
             }
             else if (pt >= 300 && pt < 400)
             {
-                if (wp == "trail")
+                if (wp == "trail" || wp == "lead")
                 {
-                    // XWqq > 0.7 (for trailing Vqq fat jet)
-                    if (var == "nominal") { return 0.93; }
-                    else if (var == "up") { return 0.93+0.04; }
-                    else if (var == "dn") { return 0.93-0.03; }
-                }
-                else if (wp == "lead")
-                {
-                    // XWqq > 0.8 (for leading Vqq fat jet)
-                    if (var == "nominal") { return 0.86; }
-                    else if (var == "up") { return 0.86+0.04; }
-                    else if (var == "dn") { return 0.86-0.03; }
+                    if (var == "nominal") { return 0.95; }
+                    else if (var == "up") { return 0.95 + 0.04; }
+                    else if (var == "dn") { return 0.95 - 0.03; }
                 }
             }
             else if (pt >= 400)
             {
-                if (wp == "trail")
+                if (wp == "trail" || wp == "lead")
                 {
-                    // XWqq > 0.7 (for trailing Vqq fat jet)
                     if (var == "nominal") { return 0.94; }
-                    else if (var == "up") { return 0.94+0.06*unc_mult; }
-                    else if (var == "dn") { return 0.94-0.06*unc_mult; }
-                }
-                else if (wp == "lead")
-                {
-                    // XWqq > 0.8 (for leading Vqq fat jet)
-                    if (var == "nominal") { return 0.91; }
-                    else if (var == "up") { return 0.91+0.07*unc_mult; }
-                    else if (var == "dn") { return 0.91-0.06*unc_mult; }
+                    else if (var == "up") { return 0.94 + 0.06 * unc_mult; }
+                    else if (var == "dn") { return 0.94 - 0.06 * unc_mult; }
                 }
             }
         }
@@ -597,20 +692,291 @@ public:
         };
     };
 
-    double getSF(double pt, std::string wp) 
-    { 
+    double getSF(double pt, std::string wp)
+    {
         return boohftCalib(year_str, pt, wp, "nominal");
     };
 
-    double getSFUp(double pt, std::string wp) 
-    { 
+    double getSFUp(double pt, std::string wp)
+    {
         return boohftCalib(year_str, pt, wp, "up");
     };
 
-    double getSFDn(double pt, std::string wp) 
-    { 
+    double getSFDn(double pt, std::string wp)
+    {
         return boohftCalib(year_str, pt, wp, "dn");
     };
 };
+// for all merged for jonathan's analysis
+// struct VBSVVHXWqqSFs : NanoSFsUL
+// {
+// private:
+//     double boohftCalib(std::string year, double pt, std::string wp, std::string var)
+//     {
+//         // From these slides: https://docs.google.com/presentation/d/1Y39avmA0bSe2hpPdqdM6RZr6s9N_h3iQEVLihOwebJY/edit?usp=sharing
+//         float unc_mult = (pt > 800) ? 2.0 : 1.0;
+//
+//         if (year == "2018")
+//         {
+//             if (pt >= 200 && pt < 300)
+//             {
+//                 if (wp == "trail")
+//                 {
+//                     // XWqq > 0.7 (for trailing Vqq fat jet)
+//                     if (var == "nominal") { return 0.91; }
+//                     else if (var == "up") { return 0.91+0.02; }
+//                     else if (var == "dn") { return 0.91-0.02; }
+//                 }
+//                 else if (wp == "lead")
+//                 {
+//                     // XWqq > 0.8 (for leading Vqq fat jet)
+//                     if (var == "nominal") { return 0.88; }
+//                     else if (var == "up") { return 0.88+0.02; }
+//                     else if (var == "dn") { return 0.88-0.02; }
+//                 }
+//             }
+//             else if (pt >= 300 && pt < 400)
+//             {
+//                 if (wp == "trail")
+//                 {
+//                     // XWqq > 0.7 (for trailing Vqq fat jet)
+//                     if (var == "nominal") { return 0.90; }
+//                     else if (var == "up") { return 0.90+0.02; }
+//                     else if (var == "dn") { return 0.90-0.02; }
+//                 }
+//                 else if (wp == "lead")
+//                 {
+//                     // XWqq > 0.8 (for leading Vqq fat jet)
+//                     if (var == "nominal") { return 0.87; }
+//                     else if (var == "up") { return 0.87+0.02; }
+//                     else if (var == "dn") { return 0.87-0.02; }
+//                 }
+//             }
+//             else if (pt >= 400)
+//             {
+//                 if (wp == "trail")
+//                 {
+//                     // XWqq > 0.7 (for trailing Vqq fat jet)
+//                     if (var == "nominal") { return 0.85; }
+//                     else if (var == "up") { return 0.85+0.04*unc_mult; }
+//                     else if (var == "dn") { return 0.85-0.04*unc_mult; }
+//                 }
+//                 else if (wp == "lead")
+//                 {
+//                     // XWqq > 0.8 (for leading Vqq fat jet)
+//                     if (var == "nominal") { return 0.82; }
+//                     else if (var == "up") { return 0.82+0.04*unc_mult; }
+//                     else if (var == "dn") { return 0.82-0.04*unc_mult; }
+//                 }
+//             }
+//         }
+//         else if (year == "2017")
+//         {
+//             if (pt >= 200 && pt < 300)
+//             {
+//                 if (wp == "trail")
+//                 {
+//                     // XWqq > 0.7 (for trailing Vqq fat jet)
+//                     if (var == "nominal") { return 0.96; }
+//                     else if (var == "up") { return 0.96+0.02; }
+//                     else if (var == "dn") { return 0.96-0.02; }
+//                 }
+//                 else if (wp == "lead")
+//                 {
+//                     // XWqq > 0.8 (for leading Vqq fat jet)
+//                     if (var == "nominal") { return 0.91; }
+//                     else if (var == "up") { return 0.91+0.04; }
+//                     else if (var == "dn") { return 0.91-0.04; }
+//                 }
+//             }
+//             else if (pt >= 300 && pt < 400)
+//             {
+//                 if (wp == "trail")
+//                 {
+//                     // XWqq > 0.7 (for trailing Vqq fat jet)
+//                     if (var == "nominal") { return 0.94; }
+//                     else if (var == "up") { return 0.94+0.02; }
+//                     else if (var == "dn") { return 0.94-0.02; }
+//                 }
+//                 else if (wp == "lead")
+//                 {
+//                     // XWqq > 0.8 (for leading Vqq fat jet)
+//                     if (var == "nominal") { return 0.91; }
+//                     else if (var == "up") { return 0.91+0.02; }
+//                     else if (var == "dn") { return 0.91-0.03; }
+//                 }
+//             }
+//             else if (pt >= 400)
+//             {
+//                 if (wp == "trail")
+//                 {
+//                     // XWqq > 0.7 (for trailing Vqq fat jet)
+//                     if (var == "nominal") { return 0.93; }
+//                     else if (var == "up") { return 0.93+0.04*unc_mult; }
+//                     else if (var == "dn") { return 0.93-0.04*unc_mult; }
+//                 }
+//                 else if (wp == "lead")
+//                 {
+//                     // XWqq > 0.8 (for leading Vqq fat jet)
+//                     if (var == "nominal") { return 0.91; }
+//                     else if (var == "up") { return 0.91+0.05*unc_mult; }
+//                     else if (var == "dn") { return 0.91-0.04*unc_mult; }
+//                 }
+//             }
+//         }
+//         else if (year == "2016postVFP")
+//         {
+//             if (pt >= 200 && pt < 300)
+//             {
+//                 if (wp == "trail")
+//                 {
+//                     // XWqq > 0.7 (for trailing Vqq fat jet)
+//                     if (var == "nominal") { return 0.96; }
+//                     else if (var == "up") { return 0.96+0.05; }
+//                     else if (var == "dn") { return 0.96-0.05; }
+//                 }
+//                 else if (wp == "lead")
+//                 {
+//                     // XWqq > 0.8 (for leading Vqq fat jet)
+//                     if (var == "nominal") { return 0.89; }
+//                     else if (var == "up") { return 0.89+0.06; }
+//                     else if (var == "dn") { return 0.89-0.05; }
+//                 }
+//             }
+//             else if (pt >= 300 && pt < 400)
+//             {
+//                 if (wp == "trail")
+//                 {
+//                     // XWqq > 0.7 (for trailing Vqq fat jet)
+//                     if (var == "nominal") { return 0.89; }
+//                     else if (var == "up") { return 0.89+0.04; }
+//                     else if (var == "dn") { return 0.89-0.04; }
+//                 }
+//                 else if (wp == "lead")
+//                 {
+//                     // XWqq > 0.8 (for leading Vqq fat jet)
+//                     if (var == "nominal") { return 0.87; }
+//                     else if (var == "up") { return 0.87+0.04; }
+//                     else if (var == "dn") { return 0.87-0.04; }
+//                 }
+//             }
+//             else if (pt >= 400)
+//             {
+//                 if (wp == "trail")
+//                 {
+//                     // XWqq > 0.7 (for trailing Vqq fat jet)
+//                     if (var == "nominal") { return 0.85; }
+//                     else if (var == "up") { return 0.85+0.07*unc_mult; }
+//                     else if (var == "dn") { return 0.85-0.06*unc_mult; }
+//                 }
+//                 else if (wp == "lead")
+//                 {
+//                     // XWqq > 0.8 (for leading Vqq fat jet)
+//                     if (var == "nominal") { return 0.85; }
+//                     else if (var == "up") { return 0.85+0.07*unc_mult; }
+//                     else if (var == "dn") { return 0.85-0.07*unc_mult; }
+//                 }
+//             }
+//         }
+//         else if (year == "2016preVFP")
+//         {
+//             if (pt >= 200 && pt < 300)
+//             {
+//                 if (wp == "trail")
+//                 {
+//                     // XWqq > 0.7 (for trailing Vqq fat jet)
+//                     if (var == "nominal") { return 0.92; }
+//                     else if (var == "up") { return 0.92+0.04; }
+//                     else if (var == "dn") { return 0.92-0.04; }
+//                 }
+//                 else if (wp == "lead")
+//                 {
+//                     // XWqq > 0.8 (for leading Vqq fat jet)
+//                     if (var == "nominal") { return 0.87; }
+//                     else if (var == "up") { return 0.87+0.04; }
+//                     else if (var == "dn") { return 0.87-0.03; }
+//                 }
+//             }
+//             else if (pt >= 300 && pt < 400)
+//             {
+//                 if (wp == "trail")
+//                 {
+//                     // XWqq > 0.7 (for trailing Vqq fat jet)
+//                     if (var == "nominal") { return 0.93; }
+//                     else if (var == "up") { return 0.93+0.04; }
+//                     else if (var == "dn") { return 0.93-0.03; }
+//                 }
+//                 else if (wp == "lead")
+//                 {
+//                     // XWqq > 0.8 (for leading Vqq fat jet)
+//                     if (var == "nominal") { return 0.86; }
+//                     else if (var == "up") { return 0.86+0.04; }
+//                     else if (var == "dn") { return 0.86-0.03; }
+//                 }
+//             }
+//             else if (pt >= 400)
+//             {
+//                 if (wp == "trail")
+//                 {
+//                     // XWqq > 0.7 (for trailing Vqq fat jet)
+//                     if (var == "nominal") { return 0.94; }
+//                     else if (var == "up") { return 0.94+0.06*unc_mult; }
+//                     else if (var == "dn") { return 0.94-0.06*unc_mult; }
+//                 }
+//                 else if (wp == "lead")
+//                 {
+//                     // XWqq > 0.8 (for leading Vqq fat jet)
+//                     if (var == "nominal") { return 0.91; }
+//                     else if (var == "up") { return 0.91+0.07*unc_mult; }
+//                     else if (var == "dn") { return 0.91-0.06*unc_mult; }
+//                 }
+//             }
+//         }
+//         return 1.;
+//     };
+// public:
+//     std::string year_str;
+//
+//     VBSVVHXWqqSFs() { /* Do nothing */ };
+//
+//     void init(TString file_name)
+//     {
+//         NanoSFsUL::init(file_name);
+//
+//         switch (campaign)
+//         {
+//         case (RunIISummer20UL16APV):
+//             year_str = "2016preVFP";
+//             break;
+//         case (RunIISummer20UL16):
+//             year_str = "2016postVFP";
+//             break;
+//         case (RunIISummer20UL17):
+//             year_str = "2017";
+//             break;
+//         case (RunIISummer20UL18):
+//             year_str = "2018";
+//             break;
+//         default:
+//             return;
+//             break;
+//         };
+//     };
+//
+//     double getSF(double pt, std::string wp)
+//     {
+//         return boohftCalib(year_str, pt, wp, "nominal");
+//     };
+//
+//     double getSFUp(double pt, std::string wp)
+//     {
+//         return boohftCalib(year_str, pt, wp, "up");
+//     };
+//
+//     double getSFDn(double pt, std::string wp)
+//     {
+//         return boohftCalib(year_str, pt, wp, "dn");
+//     };
+// };
 
 #endif

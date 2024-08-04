@@ -75,7 +75,7 @@ int main(int argc, char** argv)
 
     // Initialize Arbol
     Arbol arbol = Arbol(cli);
-    arbol.newBranch<double>("reweight_c2v_eq_3", -999);
+    // arbol.newBranch<double>("reweight_c2v_eq_3", -999);
 
     // Initialize Arbol for PDF variations
     Arbol pdf_arbol = Arbol(
@@ -87,6 +87,13 @@ int main(int argc, char** argv)
         pdf_arbol.newBranch<double>("lhe_pdf_"+std::to_string(i), -999);
     }
     pdf_arbol.newBranch<double>("event_weight", -999);
+
+    // Initialize Arbol for reweights
+    Arbol rwgt_arbol = Arbol(
+        cli.output_dir+"/"+cli.output_name+"_rwgt.root",
+        "rwgt_"+cli.output_ttree
+    );
+    rwgt_arbol.newBranch<Doubles>("reweights", {});
 
     // Initialize Cutflow
     Cutflow cutflow = Cutflow(cli.output_name + "_Cutflow");
@@ -295,6 +302,27 @@ int main(int argc, char** argv)
             }
         );
         cutflow.insert("Cut2", save_pdfweights, Right);
+
+        Cut* save_reweights = new LambdaCut(
+            "SemiMerged_SaveReweights",
+            [&]()
+            {
+                // Save reweights
+                TString file_name = cli.input_tchain->GetCurrentFile()->GetName();
+                if (file_name.Contains("VBSWWH") || file_name.Contains("VBSWZH") || file_name.Contains("VBSZZH"))
+                {
+                    Doubles reweights;
+                    for (auto reweight : nt.LHEReweightingWeight())
+                    {
+                        reweights.push_back(reweight);
+                    }
+                    rwgt_arbol.setLeaf<Doubles>("reweights", reweights);
+                }
+                return true;
+            }
+        );
+        cutflow.insert("Cut2", save_reweights, Right);
+
 
     // Cut* cut3 = new LambdaCut(
     //         "Cut3", [&]() { return arbol.getLeaf<double>("ld_vqqfatjet_xwqq") > 0.6; }
@@ -1365,6 +1393,7 @@ int main(int argc, char** argv)
                 // Reset branches and globals
                 arbol.resetBranches();
                 pdf_arbol.resetBranches();
+                rwgt_arbol.resetBranches();
                 cutflow.globals.resetVars();
 
                 nt.GetEntry(entry);
@@ -1382,6 +1411,7 @@ int main(int argc, char** argv)
                                if (checkpoints.at(1))
                                {
                                    pdf_arbol.fill();
+                                   rwgt_arbol.fill();
                                }
 
                 // Update progress bar
@@ -1398,5 +1428,6 @@ int main(int argc, char** argv)
     }
     arbol.write();
     pdf_arbol.write();
+    rwgt_arbol.write();
     return 0;
 }

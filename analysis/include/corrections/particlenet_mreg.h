@@ -67,14 +67,18 @@ double massScale(double mass, int year, std::string var, double scaleVal=1.0)
 
 double jms_jmr(double mass, unsigned long lumi, unsigned long event, int year, std::string variation)
 {
+ std::cout << "jms_jmr input: mass=" << mass << ", year=" << year << ", variation=" << variation << std::endl;
  std::string jmr="nominal";
  std::string jms="nominal";
  if(variation=="jmr_up") jmr="up";
  else if (variation=="jmr_dn") jmr="down";
  else if (variation=="jms_up") jms="up";
  else if (variation=="jms_dn") jms="down";
+ std::cout << "jmr=" << jmr << ", jms=" << jms << std::endl;
  mass = massScale(mass, year, jms);
+ std::cout << "After massScale: " << mass << std::endl;
  mass = massSmear(mass, lumi, event, year, jmr);
+ std::cout << "jms_jmr output: " << mass << std::endl;
  return mass;
 }
 #endif
