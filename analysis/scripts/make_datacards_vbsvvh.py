@@ -348,17 +348,35 @@ if __name__ == "__main__":
         with uproot.open(f"../analysis/studies/vbsvvhjets_semimerged/output_{TAG}/Run2/{SIGNAL_NAME}.root") as f:
             pdf_df = f.get("pdf_tree").arrays(library="pd")
 
+        # systs = []
+        # for R in ABCD_REGIONS:
+        #     sig_df = vbsvvh.sig_df()
+        #     count = np.sum(sig_df[sig_df[R]].event_weight*pdf_df[sig_df[R]].lhe_pdf_0)
+        #     deltas = []
+        #     for i in range(1, 101):
+        #         count_var = np.sum(sig_df[sig_df[R]].event_weight*pdf_df[sig_df[R]][f"lhe_pdf_{i}"])
+        #         deltas.append(count - count_var/pdf_ratio[i])
+
+        #     deltas = np.array(deltas)
+        #     systs.append(np.sqrt(np.sum(deltas**2))/count)
         systs = []
         for R in ABCD_REGIONS:
             sig_df = vbsvvh.sig_df()
-            count = np.sum(sig_df[sig_df[R]].event_weight*pdf_df[sig_df[R]].lhe_pdf_0)
-            deltas = []
+            central_yield = np.sum(sig_df[sig_df[R]].event_weight)
+            
+            pdf_quadrature_sum = np.zeros(len(sig_df[sig_df[R]]))
             for i in range(1, 101):
-                count_var = np.sum(sig_df[sig_df[R]].event_weight*pdf_df[sig_df[R]][f"lhe_pdf_{i}"])
-                deltas.append(count - count_var/pdf_ratio[i])
+                pdf_variation = pdf_df[sig_df[sig_df[R]].index][f"lhe_pdf_{i}"]
+                pdf_quadrature_sum += (pdf_variation - 1)**2
+            
+            pdf_quadrature_sum = np.sqrt(pdf_quadrature_sum)
+            
+            up_variation = np.sum(sig_df[sig_df[R]].event_weight * (1 + pdf_quadrature_sum))
+            down_variation = np.sum(sig_df[sig_df[R]].event_weight * (1 - pdf_quadrature_sum))
+            
+            relative_uncertainty = max(abs(up_variation - central_yield), abs(down_variation - central_yield)) / central_yield
+            systs.append(relative_uncertainty)
 
-            deltas = np.array(deltas)
-            systs.append(np.sqrt(np.sum(deltas**2))/count)
 
         pdf_systs = Systematic("CMS_LHE_weights_pdf_vbsvvh", ABCD_REGIONS)
         pdf_systs.add_systs(systs)
