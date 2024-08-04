@@ -16,6 +16,11 @@ analysis/NanoTools/
 analysis/rapido/
 analysis/env_analysis/
 abcdnet/uniqueenv/
+combine/vbsvvh/__pycache__/
+combine/vbsvvh/datacards/
+combine/vbsvvh/results/
+combine/vbsvvh/workspaces/
+combine/vbsvvh/combine_logger.out
 # Ignore specific files
 analysis/data.tar.gz
 analysis/data_hadded.root
