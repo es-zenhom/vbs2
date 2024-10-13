@@ -1,10 +1,10 @@
 #!/bin/bash
 
-VERSION_TAG="output_abcdnet_v11"
+VERSION_TAG="output_abcdnet_v12"
 # Define your cut values here
-CUT_ABCDNET_SCORE=0.86
-CUT_ABS_DETA_JJ=6.1
-CUT_M_JJ=1400.0
+CUT_ABCDNET_SCORE=0.87
+CUT_ABS_DETA_JJ=6
+CUT_M_JJ=1300.0
 OUTPUT_CSV="${HISTOGRAMS_DIR}/output_mjj${CUT_M_JJ}_abcdnet${CUT_ABCDNET_SCORE}_deta${CUT_ABS_DETA_JJ}_${VERSION_TAG}_150lamda_final.csv"
 
 # New variable for the all events flag
@@ -18,8 +18,8 @@ HISTOGRAMS_DIR="${BASE_DIR}/histograms"
 mkdir -p "$HISTOGRAMS_DIR"
 
 # Compile the program
-g++ grapher.C -c -o program.o $(root-config --cflags --libs)
-g++ program.o -o myProgram $(root-config --ldflags --libs) -lGenVector
+g++ -std=c++17 grapher.C -c -o program.o $(root-config --cflags --libs)
+g++ -std=c++17 program.o -o myProgram $(root-config --ldflags --libs) -lGenVector
 
 # Function to run myProgram with correct paths
 run_my_program() {

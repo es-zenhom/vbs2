@@ -1,10 +1,10 @@
 #!/bin/bash
 
-VERSION_TAG="output_abcdnet_v11"
+VERSION_TAG="output_abcdnet_v12"
 # Define your cut values here
-CUT_ABCDNET_SCORE=0.86
-CUT_ABS_DETA_JJ=6.1
-CUT_M_JJ=1400.0
+CUT_ABCDNET_SCORE=0.87
+CUT_ABS_DETA_JJ=6
+CUT_M_JJ=1300.0
 
 # Base directory for inferences
 BASE_DIR="/home/users/eslam.zenhom/public_html/uf_work/vbs2/analysis/studies/vbsvvhjets_semimerged/${VERSION_TAG}/Run2/inferences"

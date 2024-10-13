@@ -277,6 +277,10 @@ int main(int argc, char** argv)
             "Cut2", [&]() { return arbol.getLeaf<double>("hbbfatjet_xbb") > 0.8; }
         );
         cutflow.insert("Cut1", cut2, Right);
+    Cut* cut3 = new LambdaCut(
+            "Cut3", [&]() { return arbol.getLeaf<double>("HT_fat") > 1100; }
+        );
+        cutflow.insert("Cut2", cut3, Right);
 
 
 
@@ -301,7 +305,7 @@ int main(int argc, char** argv)
                 return true;
             }
         );
-        cutflow.insert("Cut2", save_pdfweights, Right);
+        cutflow.insert("Cut3", save_pdfweights, Right);
 
         Cut* save_reweights = new LambdaCut(
             "SemiMerged_SaveReweights",
@@ -321,7 +325,7 @@ int main(int argc, char** argv)
                 return true;
             }
         );
-        cutflow.insert("Cut2", save_reweights, Right);
+        cutflow.insert("Cut3", save_reweights, Right);
 
 
     // Cut* cut3 = new LambdaCut(

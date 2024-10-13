@@ -117,7 +117,7 @@ def get_systs(sample_name, signal_regions, sf, *sf_variations, year=None):
 #                 print(df.describe())
 #
 #                 # Here you can insert your specific query conditions
-#                 query_string = "abcdnet_score > 0.86 and abs_deta_jj > 6 and M_jj > 1000"
+#                 query_string = "abcdnet_score > 0.87 and abs_deta_jj > 6 and M_jj > 1000"
 #                 filtered_df = df.query(query_string)
 #                 print(f"Rows matching '{query_string}': {filtered_df.shape[0]}")
 #                 if filtered_df.empty:
@@ -247,13 +247,13 @@ if __name__ == "__main__":
     print("Total entries initially:", len(vbsvvh.df))
 
     # Apply individual conditions and check their counts
-    vbsvvh.df["cond_abcdnet"] = vbsvvh.df["abcdnet_score"] > 0.86
-    vbsvvh.df["cond_vbs"] = vbsvvh.df["abs_deta_jj"] > 6.1
-    vbsvvh.df["cond_M_jj"] = vbsvvh.df["M_jj"] > 1400
+    vbsvvh.df["cond_abcdnet"] = vbsvvh.df["abcdnet_score"] > 0.87
+    vbsvvh.df["cond_vbs"] = vbsvvh.df["abs_deta_jj"] > 6
+    vbsvvh.df["cond_M_jj"] = vbsvvh.df["M_jj"] > 1300
 
-    print("Entries with abcdnet_score > 0.86:", vbsvvh.df["cond_abcdnet"].sum())
-    print("Entries with abs_deta_jj > 6.1:", vbsvvh.df["cond_vbs"].sum())
-    print("Entries with M_jj > 1400:", vbsvvh.df["cond_M_jj"].sum())
+    print("Entries with abcdnet_score > 0.87:", vbsvvh.df["cond_abcdnet"].sum())
+    print("Entries with abs_deta_jj > 6:", vbsvvh.df["cond_vbs"].sum())
+    print("Entries with M_jj > 1300:", vbsvvh.df["cond_M_jj"].sum())
     # Print presel column value counts before applying make_selection
     print("Presel column value counts before make_selection:", vbsvvh.df['presel'].value_counts())
 
@@ -271,30 +271,30 @@ if __name__ == "__main__":
 
     vbsvvh.df["orig_event_weight"] = vbsvvh.df.event_weight.values.copy()
 
-    vbsvvh.df["abcdnet_cut"] = vbsvvh.df.eval("abcdnet_score > 0.86")
-    vbsvvh.df["vbs_cut"] = vbsvvh.df.eval("abs_deta_jj > 6.1")
+    vbsvvh.df["abcdnet_cut"] = vbsvvh.df.eval("abcdnet_score > 0.87")
+    vbsvvh.df["vbs_cut"] = vbsvvh.df.eval("abs_deta_jj > 6")
     vbsvvh.df["regionA"] = vbsvvh.df.eval(
-        "abcdnet_score > 0.86 and abs_deta_jj > 6.1 and M_jj > 1400"
+        "abcdnet_score > 0.87 and abs_deta_jj > 6 and M_jj > 1300"
     )
     vbsvvh.df["regionB"] = vbsvvh.df.eval(
-        "abcdnet_score > 0.86 and (abs_deta_jj < 6.1 or M_jj < 1400)"
+        "abcdnet_score > 0.87 and (abs_deta_jj < 6 or M_jj < 1300)"
     )
     vbsvvh.df["regionC"] = vbsvvh.df.eval(
-        "abcdnet_score < 0.86 and abs_deta_jj > 6.1 and M_jj > 1400"
+        "abcdnet_score < 0.87 and abs_deta_jj > 6 and M_jj > 1300"
     )
     vbsvvh.df["regionD"] = vbsvvh.df.eval(
-        "abcdnet_score < 0.86 and (abs_deta_jj < 6.1 or M_jj < 1400)"
+        "abcdnet_score < 0.87 and (abs_deta_jj < 6 or M_jj < 1300)"
     )
     # Check combinations used in regions
     vbsvvh.df["cond_regionA"] = vbsvvh.df.eval("cond_abcdnet and cond_vbs and cond_M_jj")
     print("Entries in region A:", vbsvvh.df["cond_regionA"].sum())
 
-    print("Entries passing abcdnet_cut (abcdnet_score > 0.86):", vbsvvh.df["abcdnet_cut"].sum())
-    print("Entries passing vbs_cut (abs_deta_jj > 6.1):", vbsvvh.df["vbs_cut"].sum())
-    print("Entries in region A (abcdnet_score > 0.86 and abs_deta_jj > 6.1 and M_jj > 1400):", vbsvvh.df["regionA"].sum())
-    print("Entries in region B (abcdnet_score > 0.86 and (abs_deta_jj < 6.1 or M_jj < 1400)):", vbsvvh.df["regionB"].sum())
-    print("Entries in region C (abcdnet_score < 0.86 and abs_deta_jj > 6.1 and M_jj > 1400):", vbsvvh.df["regionC"].sum())
-    print("Entries in region D (abcdnet_score < 0.86 and (abs_deta_jj < 6.1 or M_jj < 1400)):", vbsvvh.df["regionD"].sum())
+    print("Entries passing abcdnet_cut (abcdnet_score > 0.87):", vbsvvh.df["abcdnet_cut"].sum())
+    print("Entries passing vbs_cut (abs_deta_jj > 6):", vbsvvh.df["vbs_cut"].sum())
+    print("Entries in region A (abcdnet_score > 0.87 and abs_deta_jj > 6 and M_jj > 1300):", vbsvvh.df["regionA"].sum())
+    print("Entries in region B (abcdnet_score > 0.87 and (abs_deta_jj < 6 or M_jj < 1300)):", vbsvvh.df["regionB"].sum())
+    print("Entries in region C (abcdnet_score < 0.87 and abs_deta_jj > 6 and M_jj > 1300):", vbsvvh.df["regionC"].sum())
+    print("Entries in region D (abcdnet_score < 0.87 and (abs_deta_jj < 6 or M_jj < 1300)):", vbsvvh.df["regionD"].sum())
     # Before applying any conditions
     print("Total entries before conditions:", len(vbsvvh.df))
 
@@ -363,17 +363,17 @@ if __name__ == "__main__":
         for R in ABCD_REGIONS:
             sig_df = vbsvvh.sig_df()
             central_yield = np.sum(sig_df[sig_df[R]].event_weight)
-            
+
             pdf_quadrature_sum = np.zeros(len(sig_df[sig_df[R]]))
             for i in range(1, 101):
                 pdf_variation = pdf_df.loc[sig_df[sig_df[R]].index, f"lhe_pdf_{i}"]
                 pdf_quadrature_sum += (pdf_variation - 1)**2
-            
+
             pdf_quadrature_sum = np.sqrt(pdf_quadrature_sum)
-            
+
             up_variation = np.sum(sig_df[sig_df[R]].event_weight * (1 + pdf_quadrature_sum))
             down_variation = np.sum(sig_df[sig_df[R]].event_weight * (1 - pdf_quadrature_sum))
-            
+
             relative_uncertainty = max(abs(up_variation - central_yield), abs(down_variation - central_yield)) / central_yield
             systs.append(relative_uncertainty)
 
@@ -612,7 +612,7 @@ if __name__ == "__main__":
 
         datacard_systs = {
             "TotalBkg_AllHad_SemiMerged": {
-                "CMS_vbsvvhjets_abcd_syst": [1 + 18.2/100],
+                "CMS_vbsvvhjets_abcd_syst": [1 + 21.1/100],
                 # "CMS_vbsvvhjets_abcd_syst": [1 + 25.4/100],
                 # "CMS_vbsvvhjets_abcd_stat": [1 + 34.0/100]
             },

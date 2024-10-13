@@ -434,6 +434,7 @@ int main(int argc, const char* argv[])
 	TH1D* hist_M_VVH_semimerged = new TH1D("hist_M_VVH_semimerged", "hist_M_VVH_semimerged", 80, 0, 1600);
 
 	TH1D* hist_abcdnet_score = new TH1D("hist_abcdnet_score", "hist_abcdnet_score", 80, 0, 1);
+	TH1D* hist_abcdnet_score_blind = new TH1D("hist_abcdnet_score_blind", "hist_abcdnet_score_blind", 80, 0, 1);
 
 	TH1D *h = new TH1D("h", "Total Events", 1, 0, 1); // One bin from 0 to 1
 
@@ -468,7 +469,109 @@ int main(int argc, const char* argv[])
 
 	TH1D* hist_HT_fat = new TH1D ("hist_HT_fat", "hist_HT_fat", 80, 0, 5000);
 
+    // Set x-axis titles for all histograms
 
+    // Histogram: hist_HT
+    hist_HT->GetXaxis()->SetTitle("HT");
+
+    // Histogram: hist_n_jets
+    hist_n_jets->GetXaxis()->SetTitle("Number of Jets");
+    // Histogram: hist_n_loose_b_jets
+    hist_n_loose_b_jets->GetXaxis()->SetTitle("Number of Loose b-Jets");
+    // Histogram: hist_n_medium_b_jets
+    hist_n_medium_b_jets->GetXaxis()->SetTitle("Number of Medium b-Jets");
+    // Histogram: hist_n_tight_b_jets
+    hist_n_tight_b_jets->GetXaxis()->SetTitle("Number of Tight b-Jets");
+    // Histogram: hist_n_fatjets
+    hist_n_fatjets->GetXaxis()->SetTitle("Number of Fat Jets");
+    // Histogram: hist_ld_vbsjet_pt
+    hist_ld_vbsjet_pt->GetXaxis()->SetTitle("Leading VBS Jet pT");
+    // Histogram: hist_ld_vbsjet_eta
+    hist_ld_vbsjet_eta->GetXaxis()->SetTitle("Leading VBS Jet Eta");
+    // Histogram: hist_ld_vbsjet_phi
+    hist_ld_vbsjet_phi->GetXaxis()->SetTitle("Leading VBS Jet Phi");
+    // Histogram: hist_tr_vbsjet_pt
+    hist_tr_vbsjet_pt->GetXaxis()->SetTitle("Trailing VBS Jet pT");
+    // Histogram: hist_tr_vbsjet_eta
+    hist_tr_vbsjet_eta->GetXaxis()->SetTitle("Trailing VBS Jet Eta");
+    // Histogram: hist_tr_vbsjet_phi
+    hist_tr_vbsjet_phi->GetXaxis()->SetTitle("Trailing VBS Jet Phi");
+    // Histogram: hist_M_jj
+    hist_M_jj->GetXaxis()->SetTitle("M_{jj}");
+    // Histogram: hist_M_jj_0_250
+    hist_M_jj_0_250->GetXaxis()->SetTitle("M_{jj} (0-250)");
+    // Histogram: hist_deta_jj
+    hist_deta_jj->GetXaxis()->SetTitle("#Delta#eta_{jj}");
+    // Histogram: hist_abs_deta_jj
+    hist_abs_deta_jj->GetXaxis()->SetTitle("|#Delta#eta_{jj}|");
+    // Histogram: hist_MET
+    hist_MET->GetXaxis()->SetTitle("MET");
+    // Histogram: hist_ld_vqqfatjet_pt
+    hist_ld_vqqfatjet_pt->GetXaxis()->SetTitle("Vqq Fat Jet pT");
+    // Histogram: hist_ld_vqqfatjet_eta
+    hist_ld_vqqfatjet_eta->GetXaxis()->SetTitle("Vqq Fat Jet Eta");
+    // Histogram: hist_ld_vqqfatjet_phi
+    hist_ld_vqqfatjet_phi->GetXaxis()->SetTitle("Vqq Fat Jet Phi");
+    // Histogram: hist_ld_vqqfatjet_mass
+    hist_ld_vqqfatjet_mass->GetXaxis()->SetTitle("Vqq Fat Jet Mass");
+    // Histogram: hist_ld_vqqfatjet_msoftdrop
+    hist_ld_vqqfatjet_msoftdrop->GetXaxis()->SetTitle("Vqq Fat Jet M_{SD}");
+    // Histogram: hist_hbbfatjet_pt
+    hist_hbbfatjet_pt->GetXaxis()->SetTitle("Hb#bar{b} Fat Jet pT");
+    // Histogram: hist_hbbfatjet_eta
+    hist_hbbfatjet_eta->GetXaxis()->SetTitle("Hb#bar{b} Fat Jet Eta");
+    // Histogram: hist_hbbfatjet_phi
+    hist_hbbfatjet_phi->GetXaxis()->SetTitle("Hb#bar{b} Fat Jet Phi");
+    // Histogram: hist_hbbfatjet_mass
+    hist_hbbfatjet_mass->GetXaxis()->SetTitle("Hb#bar{b} Fat Jet Mass");
+    // Histogram: hist_hbbfatjet_msoftdrop
+    hist_hbbfatjet_msoftdrop->GetXaxis()->SetTitle("Hb#bar{b} Fat Jet M_{SD}");
+    // Histogram: hist_ST
+    hist_ST->GetXaxis()->SetTitle("ST");
+    // Histogram: hist_ld_vqqjet_pt
+    hist_ld_vqqjet_pt->GetXaxis()->SetTitle("Leading Vqq Jet pT");
+    // Histogram: hist_ld_vqqjet_eta
+    hist_ld_vqqjet_eta->GetXaxis()->SetTitle("Leading Vqq Jet Eta");
+    // Histogram: hist_ld_vqqjet_phi
+    hist_ld_vqqjet_phi->GetXaxis()->SetTitle("Leading Vqq Jet Phi");
+    // Histogram: hist_ld_vqqjet_mass
+    hist_ld_vqqjet_mass->GetXaxis()->SetTitle("Leading Vqq Jet Mass");
+    // Histogram: hist_tr_vqqjet_pt
+    hist_tr_vqqjet_pt->GetXaxis()->SetTitle("Trailing Vqq Jet pT");
+    // Histogram: hist_tr_vqqjet_eta
+    hist_tr_vqqjet_eta->GetXaxis()->SetTitle("Trailing Vqq Jet Eta");
+    // Histogram: hist_tr_vqqjet_phi
+    hist_tr_vqqjet_phi->GetXaxis()->SetTitle("Trailing Vqq Jet Phi");
+    // Histogram: hist_tr_vqqjet_mass
+    hist_tr_vqqjet_mass->GetXaxis()->SetTitle("Trailing Vqq Jet Mass");
+    // Histogram: hist_vqqjets_Mjj
+    hist_vqqjets_Mjj->GetXaxis()->SetTitle("Vqq Jets M_{jj}");
+    // Histogram: hist_vqqjets_dR
+    hist_vqqjets_dR->GetXaxis()->SetTitle("Vqq Jets ΔR");
+    // Histogram: hist_vqqjets_pt
+    hist_vqqjets_pt->GetXaxis()->SetTitle("Vqq Jets pT");
+    // Histogram: hist_vqqjets_eta
+    hist_vqqjets_eta->GetXaxis()->SetTitle("Vqq Jets Eta");
+    // Histogram: hist_vqqjets_phi
+    hist_vqqjets_phi->GetXaxis()->SetTitle("Vqq Jets Phi");
+    // Histogram: hist_vqqjets_mass
+    hist_vqqjets_mass->GetXaxis()->SetTitle("Vqq Jets Mass");
+    // Histogram: hist_hbbfatjet_xbb
+    hist_hbbfatjet_xbb->GetXaxis()->SetTitle("Hb#bar{b} Fat Jet X_{bb}");
+    // Histogram: hist_ld_vqqfatjet_xwqq
+    hist_ld_vqqfatjet_xwqq->GetXaxis()->SetTitle("Leading Vqq Fat Jet X_{Wqq}");
+    // Histogram: hist_ld_vqqfatjet_xvqq
+    hist_ld_vqqfatjet_xvqq->GetXaxis()->SetTitle("Leading Vqq Fat Jet X_{Vqq}");
+    // Histogram: hist_M_VVH_semimerged
+    hist_M_VVH_semimerged->GetXaxis()->SetTitle("M_{VVH}");
+    // Histogram: hist_abcdnet_score
+    hist_abcdnet_score->GetXaxis()->SetTitle("ABCDNet Score");
+    // Histogram: hist_abcdnet_score_blind
+    hist_abcdnet_score_blind->GetXaxis()->SetTitle("ABCDNet Score");
+    // Histogram: h (Total Events)
+    h->GetXaxis()->SetTitle("Total Events");
+    // Histogram: hist_HT_fat
+    hist_HT_fat->GetXaxis()->SetTitle("HT (Fat Jets)");
 
 
 
@@ -1002,12 +1105,19 @@ int main(int argc, const char* argv[])
 				hist_M_VVH_semimerged->Fill(M_VVH_semimerged, weight_of_eachevent);
 
 				hist_abcdnet_score->Fill(abcdnet_score, weight_of_eachevent);
+				if (filename == "data.root") {
+					if (abcdnet_score < 0.86) {
+						hist_abcdnet_score_blind->Fill(abcdnet_score, weight_of_eachevent);
+					}
+				} else {
+					hist_abcdnet_score_blind->Fill(abcdnet_score, weight_of_eachevent);
+				}
 				hist_2D->Fill(M_jj,abcdnet_score, weight_of_eachevent);
 				hist_2D_flipped->Fill(abcdnet_score, M_jj, weight_of_eachevent);
 				h->Fill(0.5, weight_of_eachevent); // Fill the single bin with the event weight
 				hist_HT_fat->Fill(HT_fat, weight_of_eachevent);
 				// if (HT_fat < 1500) {
-				// 	cout << "Entry " << i1 << ": HT_fat = " << HT_fat 
+				// 	cout << "Entry " << i1 << ": HT_fat = " << HT_fat
 				// 		<< ", Weight = " << weight_of_eachevent << endl;
 				// }
 
@@ -1261,6 +1371,7 @@ int main(int argc, const char* argv[])
 	hist_M_VVH_semimerged->Write();
 
 	hist_abcdnet_score->Write();
+	hist_abcdnet_score_blind->Write();
 	h->Write();
     hist_abcdnet_fixedEta->Write();
     hist_eta_fixedABCDNet->Write();
@@ -1268,22 +1379,22 @@ int main(int argc, const char* argv[])
 	hist_HT_fat->Write();
 //-------------------------------------------------------------------------------
 
-// 	hist_2D->Write();
-// 	pfx->Write("profileX");
+	hist_2D->Write();
+	pfx->Write("profileX");
 
-// 	TCanvas* c2 = new TCanvas("c2", "2D Correlation with Profile", 800, 600);
-// 	c2->SetFillColor(kWhite);
-// 	hist_2D->Draw("COLZ"); // Draw the 2D histogram with color scale
-// 	hist_2D->GetXaxis()->SetTitle("Mjj");
-// 	hist_2D->GetYaxis()->SetTitle("ABCDNet score");
-// 	hist_2D->GetXaxis()->SetTitleSize(0.046);
-// 	hist_2D->GetYaxis()->SetTitleSize(0.046);
-// // And similarly for label sizes
+	TCanvas* c2 = new TCanvas("c2", "2D Correlation with Profile", 800, 600);
+	c2->SetFillColor(kWhite);
+	hist_2D->Draw("COLZ"); // Draw the 2D histogram with color scale
+	hist_2D->GetXaxis()->SetTitle("Mjj");
+	hist_2D->GetYaxis()->SetTitle("ABCDNet score");
+	hist_2D->GetXaxis()->SetTitleSize(0.046);
+	hist_2D->GetYaxis()->SetTitleSize(0.046);
+// And similarly for label sizes
 
-// 	pfx->Draw("same"); // Draw the profile on the same canvas
-// 	hist_2D->SetStats(kFALSE);
-// 	c2->SaveAs("correlation_with_profile.png"); // Save the canvas to a file
-// 	delete c2;
+	pfx->Draw("same"); // Draw the profile on the same canvas
+	hist_2D->SetStats(kFALSE);
+	c2->SaveAs("correlation_with_profile.png"); // Save the canvas to a file
+	delete c2;
 
 
 	// TCanvas* c2_flipped = new TCanvas("c2_flipped", "2D Correlation with Profile Flipped", 800, 600);
@@ -1294,7 +1405,7 @@ int main(int argc, const char* argv[])
 	// hist_2D_flipped->GetYaxis()->SetTitleSize(0.04);
 	// hist_2D_flipped->GetXaxis()->SetTitleSize(0.04);
 	// // And similarly for label sizes
-	
+
 	// pfy->Draw("same"); // Draw the profile on the same canvas
 	// hist_2D_flipped->SetStats(kFALSE);
 	// c2_flipped->SaveAs("correlation_with_profile_flipped.png"); // Save the canvas to a file

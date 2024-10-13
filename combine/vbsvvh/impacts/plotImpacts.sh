@@ -7,7 +7,7 @@ elif [[ "$1" != "" ]]; then
         exit 1
     fi
 fi
-DATACARD=../datacards/VBSVVH/scan_CV_1p0_C2V_2p0_C3_1p0.dat
+DATACARD=../datacards/VBSVVH_semimerged_abcdnet_v12/scan_CV_1p0_C2V_2p0_C3_1p0.dat
 
 # Compute impacts
 if [[ "$1" == "--unblind" ]]; then
