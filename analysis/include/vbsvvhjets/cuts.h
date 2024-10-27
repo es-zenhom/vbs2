@@ -48,7 +48,7 @@ public:
 class PassesTriggers : public Core::AnalysisCut
 {
 public:
-    PassesTriggers(std::string name, Core::Analysis& analysis) : Core::AnalysisCut(name, analysis) 
+    PassesTriggers(std::string name, Core::Analysis& analysis) : Core::AnalysisCut(name, analysis)
     {
         // Do nothing
     };
@@ -136,8 +136,8 @@ class SelectVVHFatJets : public Core::AnalysisCut
 public:
     Channel channel;
 
-    SelectVVHFatJets(std::string name, Core::Analysis& analysis, Channel channel) 
-    : Core::AnalysisCut(name, analysis) 
+    SelectVVHFatJets(std::string name, Core::Analysis& analysis, Channel channel)
+    : Core::AnalysisCut(name, analysis)
     {
         this->channel = channel;
     };
@@ -247,10 +247,10 @@ public:
     LorentzVector ld_vqqfatjet_p4;
     LorentzVector tr_vqqfatjet_p4;
 
-    SelectJetsNoFatJetOverlap(std::string name, Core::Analysis& analysis, Channel channel, 
+    SelectJetsNoFatJetOverlap(std::string name, Core::Analysis& analysis, Channel channel,
                               JetEnergyScales* jes = nullptr, BTagSFs* btag_sfs = nullptr,
-                              PileUpJetIDSFs* puid_sfs = nullptr) 
-    : Core::SelectJets(name, analysis, jes, btag_sfs, puid_sfs) 
+                              PileUpJetIDSFs* puid_sfs = nullptr)
+    : Core::SelectJets(name, analysis, jes, btag_sfs, puid_sfs)
     {
         this->channel = channel;
     };
@@ -277,8 +277,8 @@ public:
 class SelectVJets : public Core::AnalysisCut
 {
 public:
-    SelectVJets(std::string name, Core::Analysis& analysis) 
-    : Core::AnalysisCut(name, analysis) 
+    SelectVJets(std::string name, Core::Analysis& analysis)
+    : Core::AnalysisCut(name, analysis)
     {
         // Do nothing
     };
@@ -360,8 +360,8 @@ public:
     VBSVVHXWqqSFs* xwqq_sfs;
 
     SaveVariables(std::string name, Core::Analysis& analysis, Channel channel, VBSVVHXbbSFs* xbb_sfs = nullptr,
-                  VBSVVHXWqqSFs* xwqq_sfs = nullptr) 
-    : Core::AnalysisCut(name, analysis) 
+                  VBSVVHXWqqSFs* xwqq_sfs = nullptr)
+    : Core::AnalysisCut(name, analysis)
     {
         this->channel = channel;
         this->xbb_sfs = xbb_sfs;
