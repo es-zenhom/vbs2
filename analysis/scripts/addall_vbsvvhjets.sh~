@@ -1,7 +1,7 @@
-SR_X="abcdnet_score > 0.86"
-SR_Y="abs_deta_jj > 6.1 and M_jj > 1400"
+SR_X="abcdnet_score > 0.87"
+SR_Y="abs_deta_jj > 6 and M_jj > 1300"
 SR_GLOBAL="hbbfatjet_xbb > 0.8 and ld_vqqfatjet_xwqq > 0.6"
-TAG=abcdnet_v7
+TAG=abcdnet_v14
 BASEDIR=studies
 
 

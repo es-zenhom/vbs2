@@ -586,10 +586,10 @@ int main(int argc, const char* argv[])
 		std::string filename = std::filesystem::path(currentRootFile).filename(); // Extract the filename from the path
 
 		// Check if the currentRootFile exists in the datasetColumns map
-		if (datasetColumns.find(filename) == datasetColumns.end()) {
-		    std::cerr << "Error: dataset file not recognized: " << filename << std::endl;
-		    return 1; // or handle the error appropriately
-		}
+		// if (datasetColumns.find(filename) == datasetColumns.end()) {
+		//     std::cerr << "Error: dataset file not recognized: " << filename << std::endl;
+		//     return 1; // or handle the error appropriately
+		// }
 		// std::string datasetLabel = file_labels[currentRootFile]; // Get the dataset type based on the file name
 
 
@@ -842,6 +842,7 @@ int main(int argc, const char* argv[])
 
 			// if ( ld_vqqfatjet_xvqq < 0.6) continue;
 			 if ( hbbfatjet_xbb < 0.8) continue;
+			 if ( HT_fat < 1100) std::cout << "ccccc:" << endl;
 
 			if(i1% 10000 ==0) std::cout<<i1<<std::endl;
 			weight_of_eachevent = xsec_sf*pu_sf*prefire_sf*puid_sf*xwqq_ld_vqq_sf*xbb_sf;
@@ -1106,7 +1107,7 @@ int main(int argc, const char* argv[])
 
 				hist_abcdnet_score->Fill(abcdnet_score, weight_of_eachevent);
 				if (filename == "data.root") {
-					if (abcdnet_score < 0.86) {
+					if (abcdnet_score < 0.8) {
 						hist_abcdnet_score_blind->Fill(abcdnet_score, weight_of_eachevent);
 					}
 				} else {
@@ -1129,7 +1130,15 @@ int main(int argc, const char* argv[])
 		}
 
 		std::vector<TH1D*> histograms = {hist_regionA, hist_regionB, hist_regionC, hist_regionD, hist_regionD1, hist_regionD2, hist_regionD3, hist_regionD4, hist_regionC1, hist_regionC2, hist_regionC3, hist_regionC4, hist_regionB1, hist_regionB2, hist_regionD1, hist_regionD2 }; // List of all your histograms corresponding to each region
-		updateCsvForRegion(outputFilename, datasetColumns, filename, histograms, regions);
+        // now check if the filename is recognized:
+        if (datasetColumns.find(filename) != datasetColumns.end()) {
+            // recognized => do CSV update
+            updateCsvForRegion(outputFilename, datasetColumns, filename, histograms, regions);
+        } else {
+            // not recognized => skip updating CSV
+            std::cout << "[INFO] File '" << filename << "' not found in datasetColumns map; skipping CSV.\n";
+        }
+        // updateCsvForRegion(outputFilename, datasetColumns, filename, histograms, regions);
 
 
 

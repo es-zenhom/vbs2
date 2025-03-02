@@ -281,6 +281,16 @@ int main(int argc, char** argv)
             "Cut3", [&]() { return arbol.getLeaf<double>("HT_fat") > 1100; }
         );
         cutflow.insert("Cut2", cut3, Right);
+    Cut* cut4 = new LambdaCut(
+            "Cut4",     [&]() {
+        // We want events where both tr_vqqjet_eta and ld_vqqjet_eta
+        // have absolute value < 2.5
+        double tr_eta = arbol.getLeaf<double>("tr_vqqjet_eta");
+        double ld_eta = arbol.getLeaf<double>("ld_vqqjet_eta");
+        return (std::fabs(tr_eta) < 2.5 && std::fabs(ld_eta) < 2.5);
+    }
+        );
+        cutflow.insert("Cut3", cut4, Right);
 
 
 
@@ -305,7 +315,7 @@ int main(int argc, char** argv)
                 return true;
             }
         );
-        cutflow.insert("Cut3", save_pdfweights, Right);
+        cutflow.insert("Cut4", save_pdfweights, Right);
 
         Cut* save_reweights = new LambdaCut(
             "SemiMerged_SaveReweights",
@@ -325,7 +335,7 @@ int main(int argc, char** argv)
                 return true;
             }
         );
-        cutflow.insert("Cut3", save_reweights, Right);
+        cutflow.insert("Cut4", save_reweights, Right);
 
 
     // Cut* cut3 = new LambdaCut(

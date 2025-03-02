@@ -117,7 +117,7 @@ def get_systs(sample_name, signal_regions, sf, *sf_variations, year=None):
 #                 print(df.describe())
 #
 #                 # Here you can insert your specific query conditions
-#                 query_string = "abcdnet_score > 0.87 and abs_deta_jj > 6 and M_jj > 1000"
+#                 query_string = "abcdnet_score > 0.8 and abs_deta_jj > 6 and M_jj > 1000"
 #                 filtered_df = df.query(query_string)
 #                 print(f"Rows matching '{query_string}': {filtered_df.shape[0]}")
 #                 if filtered_df.empty:
@@ -247,11 +247,11 @@ if __name__ == "__main__":
     print("Total entries initially:", len(vbsvvh.df))
 
     # Apply individual conditions and check their counts
-    vbsvvh.df["cond_abcdnet"] = vbsvvh.df["abcdnet_score"] > 0.87
+    vbsvvh.df["cond_abcdnet"] = vbsvvh.df["abcdnet_score"] > 0.8
     vbsvvh.df["cond_vbs"] = vbsvvh.df["abs_deta_jj"] > 6
     vbsvvh.df["cond_M_jj"] = vbsvvh.df["M_jj"] > 1300
 
-    print("Entries with abcdnet_score > 0.87:", vbsvvh.df["cond_abcdnet"].sum())
+    print("Entries with abcdnet_score > 0.8:", vbsvvh.df["cond_abcdnet"].sum())
     print("Entries with abs_deta_jj > 6:", vbsvvh.df["cond_vbs"].sum())
     print("Entries with M_jj > 1300:", vbsvvh.df["cond_M_jj"].sum())
     # Print presel column value counts before applying make_selection
@@ -271,30 +271,30 @@ if __name__ == "__main__":
 
     vbsvvh.df["orig_event_weight"] = vbsvvh.df.event_weight.values.copy()
 
-    vbsvvh.df["abcdnet_cut"] = vbsvvh.df.eval("abcdnet_score > 0.87")
+    vbsvvh.df["abcdnet_cut"] = vbsvvh.df.eval("abcdnet_score > 0.8")
     vbsvvh.df["vbs_cut"] = vbsvvh.df.eval("abs_deta_jj > 6")
     vbsvvh.df["regionA"] = vbsvvh.df.eval(
-        "abcdnet_score > 0.87 and abs_deta_jj > 6 and M_jj > 1300"
+        "abcdnet_score > 0.8 and abs_deta_jj > 6 and M_jj > 1300"
     )
     vbsvvh.df["regionB"] = vbsvvh.df.eval(
-        "abcdnet_score > 0.87 and (abs_deta_jj < 6 or M_jj < 1300)"
+        "abcdnet_score > 0.8 and (abs_deta_jj < 6 or M_jj < 1300)"
     )
     vbsvvh.df["regionC"] = vbsvvh.df.eval(
-        "abcdnet_score < 0.87 and abs_deta_jj > 6 and M_jj > 1300"
+        "abcdnet_score < 0.8 and abs_deta_jj > 6 and M_jj > 1300"
     )
     vbsvvh.df["regionD"] = vbsvvh.df.eval(
-        "abcdnet_score < 0.87 and (abs_deta_jj < 6 or M_jj < 1300)"
+        "abcdnet_score < 0.8 and (abs_deta_jj < 6 or M_jj < 1300)"
     )
     # Check combinations used in regions
     vbsvvh.df["cond_regionA"] = vbsvvh.df.eval("cond_abcdnet and cond_vbs and cond_M_jj")
     print("Entries in region A:", vbsvvh.df["cond_regionA"].sum())
 
-    print("Entries passing abcdnet_cut (abcdnet_score > 0.87):", vbsvvh.df["abcdnet_cut"].sum())
+    print("Entries passing abcdnet_cut (abcdnet_score > 0.8):", vbsvvh.df["abcdnet_cut"].sum())
     print("Entries passing vbs_cut (abs_deta_jj > 6):", vbsvvh.df["vbs_cut"].sum())
-    print("Entries in region A (abcdnet_score > 0.87 and abs_deta_jj > 6 and M_jj > 1300):", vbsvvh.df["regionA"].sum())
-    print("Entries in region B (abcdnet_score > 0.87 and (abs_deta_jj < 6 or M_jj < 1300)):", vbsvvh.df["regionB"].sum())
-    print("Entries in region C (abcdnet_score < 0.87 and abs_deta_jj > 6 and M_jj > 1300):", vbsvvh.df["regionC"].sum())
-    print("Entries in region D (abcdnet_score < 0.87 and (abs_deta_jj < 6 or M_jj < 1300)):", vbsvvh.df["regionD"].sum())
+    print("Entries in region A (abcdnet_score > 0.8 and abs_deta_jj > 6 and M_jj > 1300):", vbsvvh.df["regionA"].sum())
+    print("Entries in region B (abcdnet_score > 0.8 and (abs_deta_jj < 6 or M_jj < 1300)):", vbsvvh.df["regionB"].sum())
+    print("Entries in region C (abcdnet_score < 0.8 and abs_deta_jj > 6 and M_jj > 1300):", vbsvvh.df["regionC"].sum())
+    print("Entries in region D (abcdnet_score < 0.8 and (abs_deta_jj < 6 or M_jj < 1300)):", vbsvvh.df["regionD"].sum())
     # Before applying any conditions
     print("Total entries before conditions:", len(vbsvvh.df))
 
@@ -467,7 +467,7 @@ if __name__ == "__main__":
         )
         # SIG_SYSTS_LIMIT.add_row(stat_systs)                                                                       first data crad created
         for i, (region, R) in enumerate(zip(ABCD_REGIONS, ["A", "B", "C" , "D"])):
-            stat_systs = Systematic(f"CMS_vbsvvhjets_mcstat{R}", ABCD_REGIONS)
+            stat_systs = Systematic(f"CMS_vbsvvhjets_semimerged_mcstat{R}", ABCD_REGIONS)
             temp_systs = [-999, -999, -999, -999]
             temp_systs[i] = vbsvvh.sig_error(selection=region)/vbsvvh.sig_count(selection=region)
             stat_systs.add_systs(temp_systs)
@@ -478,19 +478,57 @@ if __name__ == "__main__":
         # -- ParticleNet Xbb scale factors -----------------------------------------------------
         for year in [-2016, 2016, 2017, 2018]:
             cms_year_str = get_year_str(year).replace("20", "")
-            xbb_sf_systs = Systematic(f"CMS_vbsvvhjets_bTagWeightXbb_13TeV_{cms_year_str}", ABCD_REGIONS)
+            xbb_sf_systs = Systematic(f"CMS_vbsvvhjets_semimerged_bTagWeightXbb_13TeV_{cms_year_str}", ABCD_REGIONS)
             xbb_sf_systs.add_systs(
                 get_systs(SIGNAL_NAME, ABCD_REGIONS, "xbb_sf", "xbb_sf_dn", "xbb_sf_up", year=year)
             )
             SIG_SYSTS_LIMIT.add_row(xbb_sf_systs)
         # --------------------------------------------------------------------------------------
+        # -- EXTRA ------------------------------------------------------------------------
+        valuesbbfit={}
+        valuesbbfit["2018"]=[0.037,0.037,0.037,0.037]
+        valuesbbfit["2017"]=[0.028,0.028,0.028,0.028]
+        valuesbbfit["2016"]=[0.033,0.033,0.033,0.033]
+        valuesbbfit["-2016"]=[0.080,0.080,0.080,0.080]
+        print(valuesbbfit)
+        for year in [-2016,2016,2017,2018 ]:
+            A_prop=vbsvvh.sig_count(selection="regionA and year=="+str(year))/vbsvvh.sig_count(selection="regionA")
+            B_prop=vbsvvh.sig_count(selection="regionB and year=="+str(year))/vbsvvh.sig_count(selection="regionB")
+            C_prop=vbsvvh.sig_count(selection="regionC and year=="+str(year))/vbsvvh.sig_count(selection="regionC")
+            D_prop=vbsvvh.sig_count(selection="regionD and year=="+str(year))/vbsvvh.sig_count(selection="regionD")
+            print(A_prop,B_prop,C_prop,D_prop)
+            valuesbbfit[str(year)][0]=valuesbbfit[str(year)][0]*float(A_prop)
+            valuesbbfit[str(year)][1]=valuesbbfit[str(year)][1]*float(B_prop)
+            valuesbbfit[str(year)][2]=valuesbbfit[str(year)][2]*float(C_prop)
+            valuesbbfit[str(year)][3]=valuesbbfit[str(year)][3]*float(D_prop)
 
+        #ABCD_REGIONS = ["regionA", "regionB", "regionC", "regionD"]
+
+        #if(args.dir=="Run2_2018"): valuesbbfit=[0.0175,0.0,0.0,0.0]
+        #if(args.dir=="Run2_2017"): valuesbbfit=[0.0,0.0356,0.0,0.0]
+        #if(args.dir=="Run2_2016postVFP"): valuesbbfit=[0.0,0.0,0.0250,0.0]
+        #if(args.dir=="Run2_2016preVFP"): valuesbbfit=[0.0,0.0,0.0,0.0182]i
+        print(valuesbbfit)
+        #quit()
+
+        lumi_systs = Systematic("CMS_vbsvvhjets_semimerged_bTagXbbFit_13TeV_18", ABCD_REGIONS)
+        lumi_systs.add_systs([valuesbbfit["2018"][i] for i, R in enumerate(ABCD_REGIONS)])
+        SIG_SYSTS_LIMIT.add_row(lumi_systs)
+        lumi_systs = Systematic("CMS_vbsvvhjets_semimerged_bTagXbbFit_13TeV_17", ABCD_REGIONS)
+        lumi_systs.add_systs([valuesbbfit["2017"][i] for i, R in enumerate(ABCD_REGIONS)])
+        SIG_SYSTS_LIMIT.add_row(lumi_systs)
+        lumi_systs = Systematic("CMS_vbsvvhjets_semimerged_bTagXbbFit_13TeV_16postVFP", ABCD_REGIONS)
+        lumi_systs.add_systs([valuesbbfit["2016"][i] for i, R in enumerate(ABCD_REGIONS)])
+        SIG_SYSTS_LIMIT.add_row(lumi_systs)
+        lumi_systs = Systematic("CMS_vbsvvhjets_semimerged_bTagXbbFit_13TeV_16preVFP", ABCD_REGIONS)
+        lumi_systs.add_systs([valuesbbfit["-2016"][i] for i, R in enumerate(ABCD_REGIONS)])
+        SIG_SYSTS_LIMIT.add_row(lumi_systs)
 
         # -- ParticleNet XWqq scale factors -----------------------------------------------------
         for year in [-2016, 2016, 2017, 2018]:
             cms_year_str = get_year_str(year).replace("20", "")
             # Leading V->qq jet
-            xwqq_sf_systs = Systematic(f"CMS_vbsvvhjets_qTagWeightXWqq_ldVqq_13TeV_{cms_year_str}", ABCD_REGIONS)
+            xwqq_sf_systs = Systematic(f"CMS_vbsvvhjets_semimerged_qTagWeightXWqq_ldVqq_13TeV_{cms_year_str}", ABCD_REGIONS)
             xwqq_sf_systs.add_systs(
                 get_systs(SIGNAL_NAME, ABCD_REGIONS, "xwqq_ld_vqq_sf", "xwqq_ld_vqq_sf_up", "xwqq_ld_vqq_sf_dn", year=year)
             )
@@ -612,7 +650,8 @@ if __name__ == "__main__":
 
         datacard_systs = {
             "TotalBkg_AllHad_SemiMerged": {
-                "CMS_vbsvvhjets_abcd_syst": [1 + 21.1/100],
+                "CMS_vbsvvhjets_semimerged_abcd_syst": [1 + 19.01/100],
+                # "CMS_vbsvvhjets_abcd_syst": [1 + 21.1/100],
                 # "CMS_vbsvvhjets_abcd_syst": [1 + 25.4/100],
                 # "CMS_vbsvvhjets_abcd_stat": [1 + 34.0/100]
             },
@@ -639,7 +678,7 @@ if __name__ == "__main__":
             {"TotalSig": [vbsvvh.sig_count(selection=R) for R in ABCD_REGIONS]},
             {"TotalBkg_AllHad_SemiMerged": [1.0 for R in ABCD_REGIONS]},
             datacard_systs,
-            rparam_labels=["vbsvvhjets_a", "vbsvvhjets_b", "vbsvvhjets_c", "vbsvvhjets_d"]
+            rparam_labels=["vbsvvhjets_semimerged_a", "vbsvvhjets_semimerged_b", "vbsvvhjets_semimerged_c", "vbsvvhjets_semimerged_d"]
         )
         datacard.fill()
 

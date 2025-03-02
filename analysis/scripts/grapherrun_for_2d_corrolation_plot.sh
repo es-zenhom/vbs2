@@ -1,8 +1,8 @@
 #!/bin/bash
 
-VERSION_TAG="output_abcdnet_v12"
+VERSION_TAG="output_abcdnet_v15"
 # Define your cut values here
-CUT_ABCDNET_SCORE=0.87
+CUT_ABCDNET_SCORE=0.8
 CUT_ABS_DETA_JJ=6
 CUT_M_JJ=1300.0
 

@@ -161,7 +161,7 @@ public:
         return boohftCalib(year_str, pt, "dn");
     };
 };
-// https://lutton-vvh-sfbdt.web.cern.ch/H_bb_PNetXbbVsQCD-Eslam_2018/4_fit/
+// https://lutton-vvh-sfbdt.web.cern.ch/H_bb_PNetXbbVsQCD-Eslam_NoEFR_2018/4_fit/
 struct VBSVVHXbbSFs : NanoSFsUL
 {
 private:
@@ -169,128 +169,136 @@ private:
     {
         if (year == "2018")
         {
-            /* 2018 bb-tagging SF (SF_flvB)
-               pT [300, 400) | pT [400, 500) | pT [500, 600) | pT [600, +∞)
-               0.952 [-0.055/+0.045] | 1.068 [-0.116/+0.121] | 0.939 [-0.036/+0.032] | 1.038 [-0.035/+0.034]
+            /*
+              2018 bb-tagging SF (SF_flvB), High Purity WP
+              pT [300, 400)   pT [400, 500)   pT [500, 600)   pT [600, +∞)
+              0.989 [-0.068/+0.064]   1.088 [-0.135/+0.139]   0.957 [-0.033/+0.031]   1.051 [-0.036/+0.041]
             */
             if (pt >= 300 && pt < 400)
             {
-                if (var == "nominal") { return 0.952; }
-                else if (var == "up") { return 0.952+0.045; }
-                else if (var == "dn") { return 0.952-0.055; }
+                if (var == "nominal") { return 0.989; }
+                else if (var == "up") { return 0.989 + 0.064; }
+                else if (var == "dn") { return 0.989 - 0.068; }
             }
             else if (pt >= 400 && pt < 500)
             {
-                if (var == "nominal") { return 1.068; }
-                else if (var == "up") { return 1.068+0.121; }
-                else if (var == "dn") { return 1.068-0.116; }
+                if (var == "nominal") { return 1.088; }
+                else if (var == "up") { return 1.088 + 0.139; }
+                else if (var == "dn") { return 1.088 - 0.135; }
             }
             else if (pt >= 500 && pt < 600)
             {
-                if (var == "nominal") { return 0.939; }
-                else if (var == "up") { return 0.939+0.032; }
-                else if (var == "dn") { return 0.939-0.036; }
+                if (var == "nominal") { return 0.957; }
+                else if (var == "up") { return 0.957 + 0.031; }
+                else if (var == "dn") { return 0.957 - 0.033; }
             }
             else if (pt >= 600)
             {
-                if (var == "nominal") { return 1.038; }
-                else if (var == "up") { return 1.038+0.034; }
-                else if (var == "dn") { return 1.038-0.035; }
+                if (var == "nominal") { return 1.051; }
+                else if (var == "up") { return 1.051 + 0.041; }
+                else if (var == "dn") { return 1.051 - 0.036; }
             }
         }
         if (year == "2017")
         {
-            /* 2017 bb-tagging SF (SF_flvB)
-               pT [300, 400) | pT [400, 500) | pT [500, 600) | pT [600, +∞)
-               0.985 [-0.140/+0.140] | 1.063 [-0.114/+0.118] | 1.054 [-0.095/+0.098] | 1.077 [-0.074/+0.076]
+            /*
+              2017 bb-tagging SF (SF_flvB), High Purity WP
+              pT [300, 400)   pT [400, 500)   pT [500, 600)   pT [600, +∞)
+              0.992 [-0.146/+0.146]   1.090 [-0.096/+0.099]   1.082 [-0.059/+0.063]   1.075 [-0.077/+0.079]
             */
             if (pt >= 300 && pt < 400)
-            {
-                if (var == "nominal") { return 0.985; }
-                else if (var == "up") { return 0.985+0.140; }
-                else if (var == "dn") { return 0.985-0.140; }
-            }
-            else if (pt >= 400 && pt < 500)
-            {
-                if (var == "nominal") { return 1.063; }
-                else if (var == "up") { return 1.063+0.118; }
-                else if (var == "dn") { return 1.063-0.114; }
-            }
-            else if (pt >= 500 && pt < 600)
-            {
-                if (var == "nominal") { return 1.054; }
-                else if (var == "up") { return 1.054+0.098; }
-                else if (var == "dn") { return 1.054-0.095; }
-            }
-            else if (pt >= 600)
-            {
-                if (var == "nominal") { return 1.077; }
-                else if (var == "up") { return 1.077+0.076; }
-                else if (var == "dn") { return 1.077-0.074; }
-            }
-        }
-        if (year == "2016postVFP")
-        {
-            /* 2016 bb-tagging SF (SF_flvB)
-               pT [300, 400) | pT [400, 500) | pT [500, 600) | pT [600, +∞)
-               0.981 [-0.124/+0.119] | 0.994 [-0.117/+0.119] | 0.992 [-0.093/+0.105] | 1.098 [-0.112/+0.223]
-            */
-            if (pt >= 300 && pt < 400)
-            {
-                if (var == "nominal") { return 0.981; }
-                else if (var == "up") { return 0.981+0.119; }
-                else if (var == "dn") { return 0.981-0.124; }
-            }
-            else if (pt >= 400 && pt < 500)
-            {
-                if (var == "nominal") { return 0.994; }
-                else if (var == "up") { return 0.994+0.119; }
-                else if (var == "dn") { return 0.994-0.117; }
-            }
-            else if (pt >= 500 && pt < 600)
             {
                 if (var == "nominal") { return 0.992; }
-                else if (var == "up") { return 0.992+0.105; }
-                else if (var == "dn") { return 0.992-0.093; }
-            }
-            else if (pt >= 600)
-            {
-                if (var == "nominal") { return 1.098; }
-                else if (var == "up") { return 1.098+0.223; }
-                else if (var == "dn") { return 1.098-0.112; }
-            }
-        }
-        if (year == "2016preVFP")
-        {
-            /* 2016APV bb-tagging SF (SF_flvB)
-               pT [300, 400) | pT [400, 500) | pT [500, 600) | pT [600, +∞)
-               0.980 [-0.097/+0.109] | 0.993 [-0.069/+0.094] | 1.046 [-0.074/+0.121] | 1.099 [-0.129/+0.239]
-            */
-            if (pt >= 300 && pt < 400)
-            {
-                if (var == "nominal") { return 0.980; }
-                else if (var == "up") { return 0.980+0.109; }
-                else if (var == "dn") { return 0.980-0.097; }
+                else if (var == "up") { return 0.992 + 0.146; }
+                else if (var == "dn") { return 0.992 - 0.146; }
             }
             else if (pt >= 400 && pt < 500)
             {
-                if (var == "nominal") { return 0.993; }
-                else if (var == "up") { return 0.993+0.094; }
-                else if (var == "dn") { return 0.993-0.069; }
+                if (var == "nominal") { return 1.090; }
+                else if (var == "up") { return 1.090 + 0.099; }
+                else if (var == "dn") { return 1.090 - 0.096; }
             }
             else if (pt >= 500 && pt < 600)
             {
-                if (var == "nominal") { return 1.046; }
-                else if (var == "up") { return 1.046+0.121; }
-                else if (var == "dn") { return 1.046-0.074; }
+                if (var == "nominal") { return 1.082; }
+                else if (var == "up") { return 1.082 + 0.063; }
+                else if (var == "dn") { return 1.082 - 0.059; }
             }
             else if (pt >= 600)
             {
-                if (var == "nominal") { return 1.099; }
-                else if (var == "up") { return 1.099+0.239; }
-                else if (var == "dn") { return 1.099-0.129; }
+                if (var == "nominal") { return 1.075; }
+                else if (var == "up") { return 1.075 + 0.079; }
+                else if (var == "dn") { return 1.075 - 0.077; }
             }
         }
+
+        if (year == "2016postVFP")
+        {
+            /*
+              2016 (postVFP) bb-tagging SF (SF_flvB), High Purity WP
+              pT [300, 400)   pT [400, 500)   pT [500, 600)   pT [600, +∞)
+              0.975 [-0.124/+0.122]   1.003 [-0.122/+0.124]   0.993 [-0.090/+0.104]   1.131 [-0.120/+0.240]
+            */
+            if (pt >= 300 && pt < 400)
+            {
+                if (var == "nominal") { return 0.975; }
+                else if (var == "up") { return 0.975 + 0.122; }
+                else if (var == "dn") { return 0.975 - 0.124; }
+            }
+            else if (pt >= 400 && pt < 500)
+            {
+                if (var == "nominal") { return 1.003; }
+                else if (var == "up") { return 1.003 + 0.124; }
+                else if (var == "dn") { return 1.003 - 0.122; }
+            }
+            else if (pt >= 500 && pt < 600)
+            {
+                if (var == "nominal") { return 0.993; }
+                else if (var == "up") { return 0.993 + 0.104; }
+                else if (var == "dn") { return 0.993 - 0.090; }
+            }
+            else if (pt >= 600)
+            {
+                if (var == "nominal") { return 1.131; }
+                else if (var == "up") { return 1.131 + 0.240; }
+                else if (var == "dn") { return 1.131 - 0.120; }
+            }
+        }
+
+        if (year == "2016preVFP")
+        {
+            /*
+              2016APV (preVFP) bb-tagging SF (SF_flvB), High Purity WP
+              pT [300, 400)   pT [400, 500)   pT [500, 600)   pT [600, +∞)
+              0.993 [-0.100/+0.113]   1.000 [-0.065/+0.106]   1.049 [-0.067/+0.132]   1.179 [-0.185/+0.339]
+            */
+            if (pt >= 300 && pt < 400)
+            {
+                if (var == "nominal") { return 0.993; }
+                else if (var == "up") { return 0.993 + 0.113; }
+                else if (var == "dn") { return 0.993 - 0.100; }
+            }
+            else if (pt >= 400 && pt < 500)
+            {
+                if (var == "nominal") { return 1.000; }
+                else if (var == "up") { return 1.000 + 0.106; }
+                else if (var == "dn") { return 1.000 - 0.065; }
+            }
+            else if (pt >= 500 && pt < 600)
+            {
+                if (var == "nominal") { return 1.049; }
+                else if (var == "up") { return 1.049 + 0.132; }
+                else if (var == "dn") { return 1.049 - 0.067; }
+            }
+            else if (pt >= 600)
+            {
+                if (var == "nominal") { return 1.179; }
+                else if (var == "up") { return 1.179 + 0.339; }
+                else if (var == "dn") { return 1.179 - 0.185; }
+            }
+        }
+
+        // If none of the above conditions match (or year not recognized), return 1.
         return 1.;
     }
 public:

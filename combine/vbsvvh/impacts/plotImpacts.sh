@@ -7,7 +7,7 @@ elif [[ "$1" != "" ]]; then
         exit 1
     fi
 fi
-DATACARD=../datacards/VBSVVH_semimerged_abcdnet_v12/scan_CV_1p0_C2V_2p0_C3_1p0.dat
+DATACARD=../datacards/VBSVVH_semimerged_abcdnet_v17/scan_CV_1p0_C2V_2p0_C3_1p0.dat
 
 # Compute impacts
 if [[ "$1" == "--unblind" ]]; then
@@ -26,11 +26,11 @@ elif [[ "$1" == "--expectSignal=1" ]]; then
     rm -f ${NAME}_expectSignal1_impacts.root
     text2workspace.py $DATACARD -m 125 -o ${NAME}_expectSignal1_impacts.root
     # Set up impacts
-    combineTool.py -M Impacts -d ${NAME}_expectSignal1_impacts.root -m 125 --doInitialFit --robustFit 1 --expectSignal=1 --rMin=-20
-    combineTool.py -M Impacts -d ${NAME}_expectSignal1_impacts.root -m 125 --robustFit 1 --doFits --expectSignal=1 --rMin=-20
-    # combineTool.py -M Impacts -d ${NAME}_expectSignal1_impacts.root -m 125 --doInitialFit --robustFit 1 -t -1 --expectSignal=1 --rMin=-20
-    # combineTool.py -M Impacts -d ${NAME}_expectSignal1_impacts.root -m 125 --robustFit 1 --doFits -t -1 --expectSignal=1 --rMin=-20
-    combineTool.py -M Impacts -d ${NAME}_expectSignal1_impacts.root -m 125 -o ${NAME}_expectSignal1_impacts.json --rMin=-20
+    combineTool.py -M Impacts -d ${NAME}_expectSignal1_impacts.root -m 125 --doInitialFit --robustFit 1 -t -1 --expectSignal=1 --rMin=-5 --rMax=5
+    combineTool.py -M Impacts -d ${NAME}_expectSignal1_impacts.root -m 125 --robustFit 1 --doFits -t -1 --expectSignal=1 --rMin=-5 --rMax=5
+    # combineTool.py -M Impacts -d ${NAME}_expectSignal1_impacts.root -m 125 --doInitialFit --robustFit 1 -t -1 --expectSignal=1 --rMin=-5 --rMax=5
+    # combineTool.py -M Impacts -d ${NAME}_expectSignal1_impacts.root -m 125 --robustFit 1 --doFits -t -1 --expectSignal=1 --rMin=-5 --rMax=5
+    combineTool.py -M Impacts -d ${NAME}_expectSignal1_impacts.root -m 125 -o ${NAME}_expectSignal1_impacts.json -t -1 --rMin=-5 --rMax=5
     # Make plot
     plotImpacts.py -i ${NAME}_expectSignal1_impacts.json -o ${NAME}_expectSignal1_impacts
     mv ${NAME}_expectSignal1_impacts.pdf $HOME/public_html/${NAME}_plots/limits/${NAME}_expectSignal1_impacts.pdf
@@ -40,9 +40,12 @@ else
     rm -f ${NAME}_expectSignal0_impacts.root
     text2workspace.py $DATACARD -m 125 -o ${NAME}_expectSignal0_impacts.root
     # Set up impacts
-    combineTool.py -M Impacts -d ${NAME}_expectSignal0_impacts.root -m 125 --doInitialFit --robustFit 1 -t -1 --expectSignal=0 --rMin=-20
-    combineTool.py -M Impacts -d ${NAME}_expectSignal0_impacts.root -m 125 --robustFit 1 --doFits -t -1 --expectSignal=0 --rMin=-20
-    combineTool.py -M Impacts -d ${NAME}_expectSignal0_impacts.root -m 125 -o ${NAME}_expectSignal0_impacts.json -t -1 --expectSignal=0 --rMin=-20
+    combineTool.py -M Impacts -d ${NAME}_expectSignal0_impacts.root -m 125 --doInitialFit --robustFit 1 -t -1 --expectSignal=0 --rMin=-5 --rMax=5
+    combineTool.py -M Impacts -d ${NAME}_expectSignal0_impacts.root -m 125 --robustFit 1 --doFits -t -1 --expectSignal=0 --rMin=-5 --rMax=5
+    combineTool.py -M Impacts -d ${NAME}_expectSignal0_impacts.root -m 125 -o ${NAME}_expectSignal0_impacts.json -t -1 --expectSignal=0 --rMin=-5 --rMax=5
+    # combineTool.py -M Impacts -d ${NAME}_expectSignal0_impacts.root -m 125 --doInitialFit --robustFit 1 -t -1 --expectSignal=0 --rMin=-20
+    # combineTool.py -M Impacts -d ${NAME}_expectSignal0_impacts.root -m 125 --robustFit 1 --doFits -t -1 --expectSignal=0 --rMin=-20
+    # combineTool.py -M Impacts -d ${NAME}_expectSignal0_impacts.root -m 125 -o ${NAME}_expectSignal0_impacts.json -t -1 --expectSignal=0 --rMin=-20
     # Make plot
     plotImpacts.py -i ${NAME}_expectSignal0_impacts.json -o ${NAME}_expectSignal0_impacts
     mv ${NAME}_expectSignal0_impacts.pdf $HOME/public_html/${NAME}_plots/limits/${NAME}_expectSignal0_impacts.pdf

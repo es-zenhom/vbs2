@@ -70,7 +70,7 @@ vbs = PandasAnalysis(
 # Add presel
 vbs.df["objsel"] = True
 vbs.df["presel"] = vbs.df.eval(
-    "objsel and hbbfatjet_xbb > 0.8 and ld_vqqfatjet_xwqq > 0.6"
+    "objsel and hbbfatjet_xbb > 0.8 and ld_vqqfatjet_xwqq > 0.6 and HT_fat > 1100 and tr_vqqjet_eta > -2.5 and tr_vqqjet_eta < 2.5 and ld_vqqjet_eta > -2.5 and ld_vqqjet_eta < 2.5"
 )
 vbs.make_selection("presel")
 

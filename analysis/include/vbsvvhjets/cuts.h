@@ -294,6 +294,7 @@ public:
 
         double min_dR = 99999;
         std::pair<unsigned int, unsigned int> vqqjet_idxs;
+        bool found_valid_pair = false;
         for (unsigned int jet_i = 0; jet_i < good_jet_p4s.size(); ++jet_i)
         {
             // Skip VBS jet candidates
@@ -304,14 +305,29 @@ public:
             {
                 LorentzVector jet1_p4 = good_jet_p4s.at(jet_i);
                 LorentzVector jet2_p4 = good_jet_p4s.at(jet_j);
+                // Calculate the invariant mass of the jet pair
+                double m_inv = (jet1_p4 + jet2_p4).M();
+                if (m_inv < 50)
+                {
+                    // Skip this pair if invariant mass is less than 50 GeV
+                    continue;
+                }
+
                 double dR = ROOT::Math::VectorUtil::DeltaR(jet1_p4, jet2_p4);
                 if (dR < min_dR)
                 {
                     min_dR = dR;
                     vqqjet_idxs = std::make_pair(jet_i, jet_j);
+                    found_valid_pair = true;
                 }
             }
         }
+        // remove this events if all pairs has less than 50 GeV invariant mass
+        if (!found_valid_pair)
+        {
+            return false;
+        }
+
 
         // Sort the two (VBS-xx) Vqq jets into leading/trailing
         int ld_vqqjet_idx;
